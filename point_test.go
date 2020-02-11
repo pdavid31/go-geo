@@ -1,50 +1,84 @@
 package geo
 
 import (
+	"fmt"
 	"math"
 	"testing"
 )
 
-const lat float64 = 53.559073
-const lon float64 = 13.264618
+const (
+	lat float64 = 53.559073
+	lon float64 = 13.264618
+	z   float64 = 20
 
-var p = NewPoint(lat, lon)
+	offset float64 = 1.0
 
-const offset float64 = 1.0
+	lat2 = lat + offset
+	lon2 = lon + offset
+	z2   = z + offset
+)
 
-const lat2 = lat + offset
-const lon2 = lon + offset
-
-var p2 = NewPoint(lat2, lon2)
+var p = NewPoint(lat, lon, z)
+var p2 = NewPoint(lat2, lon2, z2)
 
 func TestNewPoint(t *testing.T) {
-	tempPoint := NewPoint(lat, lon)
-	if tempPoint.Lat() != lat || tempPoint.Lon() != lon {
-		t.Error("Point creation failed")
+	if p.x != lat || p.y != lon || p.z != z {
+		t.Error("Point constructor failed")
 	}
 }
 
-func TestPoint_AzimuthTo(t *testing.T) {
-	// TODO: calculate correct azimuth
-	correctAzimuth := 30.00696084711074
-
-	azimuth := p.AzimuthTo(p2)
-	if azimuth != correctAzimuth {
-		t.Errorf("Azimuth calculation failed - expected: %f, got: %f", azimuth, correctAzimuth)
+func TestPoint_GeometryType(t *testing.T) {
+	if p.GeometryType() != "Point" {
+		t.Error("Point GeometryType failed")
 	}
 }
+
+func TestPoint_SRID(t *testing.T) {
+	if p.SRID() != 4326 {
+		t.Error("Point SRID failed")
+	}
+}
+
+// TODO: test envelope
+
+func TestPoint_AsText(t *testing.T) {
+	x := fmt.Sprintf("%f", lat)
+	y := fmt.Sprintf("%f", lon)
+	zStr := fmt.Sprintf("%f", z)
+
+	if p.AsText() != "POINT Z ("+x+" "+y+" "+zStr+")" {
+		t.Error("Point AsText failed")
+	}
+}
+
+// TODO: test isempty
+
+func TestPoint_Is3D(t *testing.T) {
+	if !p.Is3D() {
+		t.Error("Point Is3D failed")
+	}
+}
+
+// TODO: test equals
+// TODO: test disjoint
+// TODO: test intersects
+// TODO: test touches
+// TODO: test crosses
+// TODO: test within
+// TODO: test contains
+// TODO: test overlaps
 
 func TestPoint_Distance(t *testing.T) {
 	correctDistance := math.Sqrt(offset * 2)
 
 	distance := p.Distance(p2)
 	if distance != correctDistance {
-		t.Errorf("Distance calculation failed - expected: %f, got: %f", correctDistance, distance)
+		t.Errorf("Point Distance failed - expected: %f, got: %f", correctDistance, distance)
 	}
 }
 
-func TestPoint_Near(t *testing.T) {
-	if !p.Near(p2, 5) || p.Near(p2, 1) {
-		t.Error("Distance check failed")
-	}
-}
+// TODO: test buffer
+// TODO: test convexhull
+// TODO: test intersection
+// TODO: test union
+// TODO: test difference
