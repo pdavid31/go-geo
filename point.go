@@ -2,6 +2,7 @@ package geo
 
 import (
 	"math"
+	"strings"
 )
 
 const (
@@ -34,7 +35,7 @@ func NewPoint(params ...float64) *Point {
 }
 
 func (p *Point) GeometryType() string {
-	return "Point"
+	return strings.Title(GeometryType)
 }
 
 func (p *Point) SRID() int {
