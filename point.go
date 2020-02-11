@@ -129,7 +129,7 @@ func (p *Point) Overlaps(another Geometry) bool {
 }
 
 // Distance calculates the distance between p and p2
-func (p *Point) Distance(p2 *Point) float64 {
+func (p *Point) Distance(another Geometry) float64 {
 	distance := math.Sqrt(math.Pow(p.x-p2.x, 2) + math.Pow(p.y-p2.y, 2))
 
 	return distance
