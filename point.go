@@ -14,30 +14,25 @@ func NewPoint(x float64, y float64) *Point {
 	return &Point{x: x, y: y}
 }
 
-// GeometryType returns subtype of geometry
 func (p *Point) GeometryType() string {
 	return "Point"
 }
 
-// SRID returns Spatial Reference System ID of the geometric object
 func (p *Point) SRID() int {
 	// TODO: implement
 	return 4326
 }
 
-// Envelope returns the minimum bounding box for this geometric object
 func (p *Point) Envelope() Geometry {
 	// TODO: implement
 	return nil
 }
 
-// AsText exports this geometric object to a specific Well-known Text Representation
 func (p *Point) AsText() string {
 	// TODO: implement
 	return ""
 }
 
-// IsEmpty returns true if the geometric object is an empty Geometry
 func (p *Point) IsEmpty() bool {
 	// TODO: implement
 	return false
