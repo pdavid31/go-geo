@@ -1,6 +1,12 @@
 package geo
 
-import "math"
+import (
+	"math"
+)
+
+const (
+	GeometryType = "point"
+)
 
 type Point struct {
 	x float64
@@ -10,8 +16,21 @@ type Point struct {
 }
 
 // NewPoint creates a new Point object
-func NewPoint(x float64, y float64) *Point {
-	return &Point{x: x, y: y}
+func NewPoint(params ...float64) *Point {
+	x := params[0]
+	y := params[1]
+
+	z := -5000.0
+	if len(params) > 2 {
+		z = params[2]
+	}
+
+	m := -5000.0
+	if len(params) > 3 {
+		m = params[3]
+	}
+
+	return &Point{x: x, y: y, z: z, m: m}
 }
 
 func (p *Point) GeometryType() string {
