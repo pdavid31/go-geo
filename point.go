@@ -2,64 +2,95 @@ package geo
 
 import "math"
 
-const (
-	degToRad = math.Pi / 180.0
-	radToDeg = 180.0 / math.Pi
-)
-
 type Point struct {
-	lat float64
-	lon float64
+	Lat float64
+	Lon float64
 }
 
 // NewPoint creates a new Point object
-func NewPoint(Lat, Lon float64) *Point {
-	p := new(Point)
-	p.lat = Lat
-	p.lon = Lon
-
-	return p
+func NewPoint(lat float64, lon float64) *Point {
+	return &Point{Lat: lat, Lon: lon}
 }
 
-// Lat getter
-func (p *Point) Lat() float64 {
-	return p.lat
+// GeometryType returns subtype of geometry
+func (p *Point) GeometryType() string {
+	return "Point"
 }
 
-// Lon getter
-func (p *Point) Lon() float64 {
-	return p.lon
+// SRID returns Spatial Reference System ID of the geometric object
+func (p *Point) SRID() int {
+	// TODO: implement
+	return 4326
 }
 
-// BearingTo calculates the azimuth
-func (p *Point) AzimuthTo(p2 *Point) float64 {
-	dLon := (p2.Lon() - p.Lon()) * degToRad
+// Envelope returns the minimum bounding box for this geometric object
+func (p *Point) Envelope() Geometry {
+	// TODO: implement
+	return nil
+}
 
-	lat1 := p.Lat() * degToRad
-	lat2 := p2.Lat() * degToRad
+// AsText exports this geometric object to a specific Well-known Text Representation
+func (p *Point) AsText() string {
+	// TODO: implement
+	return ""
+}
 
-	y := math.Sin(dLon) * math.Cos(lat2)
-	x := math.Cos(lat1)*math.Sin(lat2) - math.Sin(lat1)*math.Cos(lat2)*math.Cos(dLon)
-
-	azimuth := math.Atan2(y, x) * radToDeg
-
-	return azimuth
+// IsEmpty returns true if the geometric object is an empty Geometry
+func (p *Point) IsEmpty() bool {
+	return false
 }
 
 // Distance calculates the distance between p and p2
 func (p *Point) Distance(p2 *Point) float64 {
-	distance := math.Sqrt(math.Pow(p.lat-p2.lat, 2) + math.Pow(p.lon-p2.lon, 2))
+	distance := math.Sqrt(math.Pow(p.Lat-p2.Lat, 2) + math.Pow(p.Lon-p2.Lon, 2))
 
 	return distance
 }
 
-// Near checks if p2 is in the given distance of p
-func (p *Point) Near(p2 *Point, distance float64) bool {
-	d := p.Distance(p2)
+func (p *Point) Equals(another Geometry) bool {
+	panic("implement me")
+}
 
-	if d > distance {
-		return false
-	}
+func (p *Point) Disjoint(another Geometry) bool {
+	panic("implement me")
+}
 
-	return true
+func (p *Point) Intersects(another Geometry) bool {
+	panic("implement me")
+}
+
+func (p *Point) Touches(another Geometry) bool {
+	panic("implement me")
+}
+
+func (p *Point) Within(another Geometry) bool {
+	panic("implement me")
+}
+
+func (p *Point) Contains(another Geometry) bool {
+	panic("implement me")
+}
+
+func (p *Point) Overlaps(another Geometry) bool {
+	panic("implement me")
+}
+
+func (p *Point) Buffer(distance float64) Geometry {
+	panic("implement me")
+}
+
+func (p *Point) ConvexHull() Geometry {
+	panic("implement me")
+}
+
+func (p *Point) Intersection(another Geometry) Geometry {
+	panic("implement me")
+}
+
+func (p *Point) Union(another Geometry) Geometry {
+	panic("implement me")
+}
+
+func (p *Point) Difference(another Geometry) Geometry {
+	panic("implement me")
 }
