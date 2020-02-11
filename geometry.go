@@ -7,6 +7,7 @@ type Geometry interface {
 	Envelope() Geometry
 	AsText() string
 	IsEmpty() bool
+	Is3D() bool
 
 	// query
 	Equals(another Geometry) bool
