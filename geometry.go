@@ -2,12 +2,11 @@ package geo
 
 type Geometry interface {
 	// misc
-	Dimension() int
 	GeometryType() string
 	SRID() int
+	Envelope() Geometry
 	AsText() string
 	IsEmpty() bool
-	Boundary() Geometry
 
 	// query
 	Equals(another Geometry) bool
