@@ -8,6 +8,7 @@ import (
 
 const (
 	GeometryType = "point"
+	NullValue    = -9999.9
 )
 
 type Point struct {
@@ -22,12 +23,12 @@ func NewPoint(params ...float64) *Point {
 	x := params[0]
 	y := params[1]
 
-	z := -5000.0
+	z := NullValue
 	if len(params) > 2 {
 		z = params[2]
 	}
 
-	m := -5000.0
+	m := NullValue
 	if len(params) > 3 {
 		m = params[3]
 	}
@@ -58,7 +59,7 @@ func (p *Point) AsText() string {
 		rep += "Z"
 	}
 
-	if p.m != -5000.0 {
+	if p.m != NullValue {
 		rep += "M"
 	}
 
@@ -77,7 +78,7 @@ func (p *Point) AsText() string {
 		rep += " " + z
 	}
 
-	if p.m != -5000.0 {
+	if p.m != NullValue {
 		m := fmt.Sprintf("%f", p.m)
 		rep += " " + m
 	}
