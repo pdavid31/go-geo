@@ -59,6 +59,10 @@ func (p *Point) Touches(another Geometry) bool {
 	panic("implement me")
 }
 
+func (p *Point) Crosses(another Geometry) bool {
+	panic("implement me")
+}
+
 func (p *Point) Within(another Geometry) bool {
 	panic("implement me")
 }
