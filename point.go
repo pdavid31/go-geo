@@ -94,8 +94,7 @@ func (p *Point) IsEmpty() bool {
 }
 
 func (p *Point) Is3D() bool {
-	// TODO: implement
-	return false
+	return p.z != NullValue
 }
 
 func (p *Point) Equals(another Geometry) bool {
