@@ -7,8 +7,7 @@ import (
 )
 
 const (
-	GeometryType = "point"
-	NullValue    = -9999.9
+	NullValue = -9999.9
 )
 
 type Point struct {
@@ -37,7 +36,7 @@ func NewPoint(params ...float64) *Point {
 }
 
 func (p *Point) GeometryType() string {
-	return strings.Title(GeometryType)
+	return "Point"
 }
 
 func (p *Point) SRID() int {
@@ -53,7 +52,7 @@ func (p *Point) Envelope() Geometry {
 func (p *Point) AsText() string {
 	// TODO: implement
 	// example POINT ZM (1 1 5 60)
-	rep := strings.ToUpper(GeometryType) + " "
+	rep := strings.ToUpper(p.GeometryType()) + " "
 
 	if p.Is3D() {
 		rep += "Z"
