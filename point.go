@@ -1,6 +1,7 @@
 package geo
 
 import (
+	"fmt"
 	"math"
 	"strings"
 )
@@ -50,7 +51,40 @@ func (p *Point) Envelope() Geometry {
 
 func (p *Point) AsText() string {
 	// TODO: implement
-	return ""
+	// example POINT ZM (1 1 5 60)
+	rep := strings.ToUpper(GeometryType) + " "
+
+	if p.Is3D() {
+		rep += "Z"
+	}
+
+	if p.m != -5000.0 {
+		rep += "M"
+	}
+
+	lastCharacter := rep[len(rep)-1:]
+	lastValueisWhitespace := lastCharacter == " "
+	if !lastValueisWhitespace {
+		rep += " "
+	}
+
+	x := fmt.Sprintf("%f", p.x)
+	y := fmt.Sprintf("%f", p.y)
+	rep += "(" + x + " " + y
+
+	if p.Is3D() {
+		z := fmt.Sprintf("%f", p.z)
+		rep += " " + z
+	}
+
+	if p.m != -5000.0 {
+		m := fmt.Sprintf("%f", p.m)
+		rep += " " + m
+	}
+
+	rep += ")"
+
+	return rep
 }
 
 func (p *Point) IsEmpty() bool {
