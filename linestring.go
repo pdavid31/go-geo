@@ -4,6 +4,7 @@ import "reflect"
 
 type Linestring []Point
 
+/* CONSTRUCTOR */
 func NewLinestring(points ...*Point) Linestring {
 	ls := Linestring{}
 
@@ -14,8 +15,10 @@ func NewLinestring(points ...*Point) Linestring {
 	return ls
 }
 
+/* GEOMETRY */
 // TODO: implement Geometry interface
 
+/* CURVE */
 func (l Linestring) Length() float64 {
 	length := 0.
 	lastIndex := len(l) - 1

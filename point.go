@@ -17,7 +17,7 @@ type Point struct {
 	m float64
 }
 
-// NewPoint creates a new Point object
+/* CONSTRUCTOR */
 func NewPoint(params ...float64) *Point {
 	x := params[0]
 	y := params[1]
@@ -35,6 +35,7 @@ func NewPoint(params ...float64) *Point {
 	return &Point{x: x, y: y, z: z, m: m}
 }
 
+/* GEOMETRY */
 func (p *Point) GeometryType() string {
 	return "Point"
 }
