@@ -33,8 +33,9 @@ func (m Multipoint) Envelope() Geometry {
 
 func (m Multipoint) AsText() string {
 	is3D := m.Is3D()
+	lastIndex := len(m) - 2
 	rep := strings.ToUpper(m.GeometryType()) + " ("
-	for _, p := range m {
+	for i, p := range m {
 		x := fmt.Sprintf("%f", p.x)
 		y := fmt.Sprintf("%f", p.y)
 
@@ -46,6 +47,10 @@ func (m Multipoint) AsText() string {
 		}
 
 		rep += ")"
+
+		if i <= lastIndex {
+			rep += " "
+		}
 	}
 
 	rep += ")"
