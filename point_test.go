@@ -6,12 +6,6 @@ import (
 	"testing"
 )
 
-func TestNewPoint(t *testing.T) {
-	if p.x != lat || p.y != lon || p.z != z {
-		t.Error("Point constructor failed")
-	}
-}
-
 func TestPoint_GeometryType(t *testing.T) {
 	if p.GeometryType() != "Point" {
 		t.Error("Point GeometryType failed")
