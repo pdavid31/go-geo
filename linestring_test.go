@@ -28,13 +28,13 @@ func TestLinestring_Length(t *testing.T) {
 }
 
 func TestLinestring_StartPoint(t *testing.T) {
-	if !reflect.DeepEqual(ls.StartPoint(), p) {
+	if !reflect.DeepEqual(ls.StartPoint(), *p) {
 		t.Error("Linestring StartPoint failed")
 	}
 }
 
 func TestLinestring_EndPoint(t *testing.T) {
-	if !reflect.DeepEqual(ls.EndPoint(), p2) {
+	if !reflect.DeepEqual(ls.EndPoint(), *p2) {
 		t.Error("Linestring StartPoint failed")
 	}
 }
