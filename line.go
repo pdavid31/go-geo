@@ -10,3 +10,8 @@ func NewLine(p1, p2 *Point) Line {
 
 	return l
 }
+
+/* GEOMETRY */
+func (l Line) GeometryType() string {
+	return "Line"
+}

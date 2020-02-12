@@ -6,8 +6,8 @@ import (
 
 var l = NewLine(p, p2)
 
-func TestLine_Is3D(t *testing.T) {
-	if !l.Is3D() {
-		t.Error("Line Is3D failed")
+func TestLine_GeometryType(t *testing.T) {
+	if l.GeometryType() != "Line" {
+		t.Error("Line GeometryType failed")
 	}
 }
