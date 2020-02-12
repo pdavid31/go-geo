@@ -12,6 +12,8 @@ func NewMultipoint(points ...*Point) Multipoint {
 	return mp
 }
 
+// TODO: implement Geometry interface
+
 func (m Multipoint) NumGeometries() int {
 	return len(m)
 }

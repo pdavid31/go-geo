@@ -12,6 +12,8 @@ func NewLinestring(points ...*Point) Linestring {
 	return ls
 }
 
+// TODO: implement Geometry interface
+
 func (l Linestring) NumGeometries() int {
 	return len(l)
 }
