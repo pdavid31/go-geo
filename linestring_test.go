@@ -8,18 +8,6 @@ import (
 
 var ls = NewLinestring(p, p2)
 
-func TestLinestring_NumGeometries(t *testing.T) {
-	if ls.NumGeometries() != 2 {
-		t.Error("Linestring NumGeometries failed")
-	}
-}
-
-func TestLinestring_GeometryN(t *testing.T) {
-	if !reflect.DeepEqual(ls.GeometryN(0), p) {
-		t.Error("Linestring GeometryN failed")
-	}
-}
-
 func TestLinestring_Length(t *testing.T) {
 	correctLength := math.Sqrt(offset * 2)
 	if ls.Length() != correctLength {
