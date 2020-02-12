@@ -1,5 +1,7 @@
 package geo
 
+import "reflect"
+
 type Linestring []Point
 
 func NewLinestring(points ...*Point) Linestring {
@@ -51,10 +53,5 @@ func (l Linestring) IsClosed() bool {
 	start := l.StartPoint()
 	end := l.EndPoint()
 
-	// TODO: update comparison
-	if start == end {
-		return true
-	}
-
-	return false
+	return reflect.DeepEqual(start, end)
 }

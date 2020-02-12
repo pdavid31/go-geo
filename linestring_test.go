@@ -38,3 +38,14 @@ func TestLinestring_EndPoint(t *testing.T) {
 		t.Error("Linestring StartPoint failed")
 	}
 }
+
+func TestLinestring_IsClosed(t *testing.T) {
+	if ls.IsClosed() {
+		t.Error("Linestring IsClosed failed")
+	}
+
+	ls2 := NewLinestring(p, p2, p)
+	if !ls2.IsClosed() {
+		t.Error("Linestring IsClosed failed")
+	}
+}
