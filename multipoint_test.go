@@ -4,10 +4,7 @@ import (
 	"testing"
 )
 
-var mp = Multipoint{
-	*p,
-	*p2,
-}
+var mp = NewMultipoint(p, p2)
 
 func TestMultipoint_GeometryN(t *testing.T) {
 	if mp.GeometryN(0) == p {
@@ -17,6 +14,6 @@ func TestMultipoint_GeometryN(t *testing.T) {
 
 func TestMultipoint_NumGeometries(t *testing.T) {
 	if len(mp) != 2 {
-		t.Error("Multipoint NumGeometries failed")
+		t.Error("Multipoint NumGeometries failex^d")
 	}
 }
