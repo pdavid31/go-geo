@@ -39,17 +39,15 @@ func (m Multipoint) AsText() string {
 		x := fmt.Sprintf("%f", p.x)
 		y := fmt.Sprintf("%f", p.y)
 
-		rep += "(" + x + " " + y
+		rep += x + " " + y
 
 		if is3D {
 			z := fmt.Sprintf("%f", p.z)
 			rep += " " + z
 		}
 
-		rep += ")"
-
 		if i <= lastIndex {
-			rep += " "
+			rep += ", "
 		}
 	}
 
