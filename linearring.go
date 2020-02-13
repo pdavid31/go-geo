@@ -3,7 +3,7 @@ package geo
 import "reflect"
 
 type LinearRing struct {
-	Linestring
+	LineString
 }
 
 /* CONSTRUCTOR */
@@ -16,7 +16,7 @@ func NewLinearRing(points ...*Point) LinearRing {
 		points = append(points, firstPoint)
 	}
 
-	l := LinearRing{NewLinestring(points...)}
+	l := LinearRing{NewLineString(points...)}
 
 	return l
 }

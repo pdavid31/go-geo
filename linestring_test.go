@@ -7,64 +7,64 @@ import (
 	"testing"
 )
 
-var ls = NewLinestring(p, p2)
+var ls = NewLineString(p, p2)
 
-func TestLinestring_GeometryType(t *testing.T) {
-	if ls.GeometryType() != "Linestring" {
-		t.Error("Linestring GeometryType failed")
+func TestLineString_GeometryType(t *testing.T) {
+	if ls.GeometryType() != "LineString" {
+		t.Error("LineString GeometryType failed")
 	}
 }
 
-func TestLinestring_SRID(t *testing.T) {
+func TestLineString_SRID(t *testing.T) {
 	if ls.SRID() != 4326 {
-		t.Error("Linestring SRID failed")
+		t.Error("LineString SRID failed")
 	}
 }
 
-func TestLinestring_AsText(t *testing.T) {
+func TestLineString_AsText(t *testing.T) {
 	if ls.AsText() != fmt.Sprintf("LINESTRING (%f %f %f, %f %f %f)", p.x, p.y, p.z, p2.x, p2.y, p2.z) {
-		t.Error("Linestring AsText failed")
+		t.Error("LineString AsText failed")
 	}
 }
 
-func TestLinestring_IsEmpty(t *testing.T) {
+func TestLineString_IsEmpty(t *testing.T) {
 	if ls.IsEmpty() {
-		t.Error("Linestring IsEmpty failed")
+		t.Error("LineString IsEmpty failed")
 	}
 }
 
-func TestLinestring_Is3D(t *testing.T) {
+func TestLineString_Is3D(t *testing.T) {
 	if !ls.Is3D() {
-		t.Error("Linestring Is3D failed")
+		t.Error("LineString Is3D failed")
 	}
 }
 
-func TestLinestring_Length(t *testing.T) {
+func TestLineString_Length(t *testing.T) {
 	correctLength := math.Sqrt(offset * 2)
 	if ls.Length() != correctLength {
-		t.Error("Linestring Length failed")
+		t.Error("LineString Length failed")
 	}
 }
 
-func TestLinestring_StartPoint(t *testing.T) {
+func TestLineString_StartPoint(t *testing.T) {
 	if !reflect.DeepEqual(ls.StartPoint(), *p) {
-		t.Error("Linestring StartPoint failed")
+		t.Error("LineString StartPoint failed")
 	}
 }
 
-func TestLinestring_EndPoint(t *testing.T) {
+func TestLineString_EndPoint(t *testing.T) {
 	if !reflect.DeepEqual(ls.EndPoint(), *p2) {
-		t.Error("Linestring StartPoint failed")
+		t.Error("LineString StartPoint failed")
 	}
 }
 
-func TestLinestring_IsClosed(t *testing.T) {
+func TestLineString_IsClosed(t *testing.T) {
 	if ls.IsClosed() {
-		t.Error("Linestring IsClosed failed")
+		t.Error("LineString IsClosed failed")
 	}
 
-	ls2 := NewLinestring(p, p2, p)
+	ls2 := NewLineString(p, p2, p)
 	if !ls2.IsClosed() {
-		t.Error("Linestring IsClosed failed")
+		t.Error("LineString IsClosed failed")
 	}
 }

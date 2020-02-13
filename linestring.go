@@ -6,11 +6,11 @@ import (
 	"strings"
 )
 
-type Linestring []Point
+type LineString []Point
 
 /* CONSTRUCTOR */
-func NewLinestring(points ...*Point) Linestring {
-	ls := Linestring{}
+func NewLineString(points ...*Point) LineString {
+	ls := LineString{}
 
 	for _, p := range points {
 		ls = append(ls, *p)
@@ -20,19 +20,19 @@ func NewLinestring(points ...*Point) Linestring {
 }
 
 /* GEOMETRY */
-func (l Linestring) GeometryType() string {
-	return "Linestring"
+func (l LineString) GeometryType() string {
+	return "LineString"
 }
 
-func (l Linestring) SRID() int {
+func (l LineString) SRID() int {
 	return 4326
 }
 
-func (l Linestring) Envelope() Geometry {
+func (l LineString) Envelope() Geometry {
 	panic("implement me")
 }
 
-func (l Linestring) AsText() string {
+func (l LineString) AsText() string {
 	is3D := l.Is3D()
 	lastIndex := len(l) - 2
 	rep := strings.ToUpper(l.GeometryType()) + " ("
@@ -56,11 +56,11 @@ func (l Linestring) AsText() string {
 	return rep
 }
 
-func (l Linestring) IsEmpty() bool {
+func (l LineString) IsEmpty() bool {
 	return len(l) == 0
 }
 
-func (l Linestring) Is3D() bool {
+func (l LineString) Is3D() bool {
 	for _, p := range l {
 		if !p.Is3D() {
 			return false
@@ -70,64 +70,64 @@ func (l Linestring) Is3D() bool {
 	return true
 }
 
-func (l Linestring) Equals(another Geometry) bool {
+func (l LineString) Equals(another Geometry) bool {
 	panic("implement me")
 }
 
-func (l Linestring) Disjoint(another Geometry) bool {
+func (l LineString) Disjoint(another Geometry) bool {
 	panic("implement me")
 }
 
-func (l Linestring) Intersects(another Geometry) bool {
+func (l LineString) Intersects(another Geometry) bool {
 	panic("implement me")
 }
 
-func (l Linestring) Touches(another Geometry) bool {
+func (l LineString) Touches(another Geometry) bool {
 	panic("implement me")
 }
 
-func (l Linestring) Crosses(another Geometry) bool {
+func (l LineString) Crosses(another Geometry) bool {
 	panic("implement me")
 }
 
-func (l Linestring) Within(another Geometry) bool {
+func (l LineString) Within(another Geometry) bool {
 	panic("implement me")
 }
 
-func (l Linestring) Contains(another Geometry) bool {
+func (l LineString) Contains(another Geometry) bool {
 	panic("implement me")
 }
 
-func (l Linestring) Overlaps(another Geometry) bool {
+func (l LineString) Overlaps(another Geometry) bool {
 	panic("implement me")
 }
 
-func (l Linestring) Distance(another Geometry) float64 {
+func (l LineString) Distance(another Geometry) float64 {
 	panic("implement me")
 }
 
-func (l Linestring) Buffer(distance float64) Geometry {
+func (l LineString) Buffer(distance float64) Geometry {
 	panic("implement me")
 }
 
-func (l Linestring) ConvexHull() Geometry {
+func (l LineString) ConvexHull() Geometry {
 	panic("implement me")
 }
 
-func (l Linestring) Intersection(another Geometry) Geometry {
+func (l LineString) Intersection(another Geometry) Geometry {
 	panic("implement me")
 }
 
-func (l Linestring) Union(another Geometry) Geometry {
+func (l LineString) Union(another Geometry) Geometry {
 	panic("implement me")
 }
 
-func (l Linestring) Difference(another Geometry) Geometry {
+func (l LineString) Difference(another Geometry) Geometry {
 	panic("implement me")
 }
 
 /* CURVE */
-func (l Linestring) Length() float64 {
+func (l LineString) Length() float64 {
 	length := 0.
 	lastIndex := len(l) - 1
 
@@ -144,15 +144,15 @@ func (l Linestring) Length() float64 {
 	return length
 }
 
-func (l Linestring) StartPoint() Point {
+func (l LineString) StartPoint() Point {
 	return l[0]
 }
 
-func (l Linestring) EndPoint() Point {
+func (l LineString) EndPoint() Point {
 	return l[len(l)-1]
 }
 
-func (l Linestring) IsClosed() bool {
+func (l LineString) IsClosed() bool {
 	start := l.StartPoint()
 	end := l.EndPoint()
 
