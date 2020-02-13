@@ -35,6 +35,18 @@ func NewPoint(params ...float64) Point {
 }
 
 /* GEOMETRY */
+func (p *Point) Lat() float64 {
+	return p.x
+}
+
+func (p *Point) Lon() float64 {
+	return p.y
+}
+
+func (p *Point) Z() float64 {
+	return p.z
+}
+
 func (p *Point) GeometryType() string {
 	return "Point"
 }
