@@ -68,3 +68,15 @@ func TestLineString_IsClosed(t *testing.T) {
 		t.Error("LineString IsClosed failed")
 	}
 }
+
+func TestLineString_NumPoints(t *testing.T) {
+	if ls.NumPoints() != 2 {
+		t.Error("LineString NumPoints failed")
+	}
+}
+
+func TestLineString_PointN(t *testing.T) {
+	if !reflect.DeepEqual(ls.PointN(0), *p) {
+		t.Error("LineString PointN failed")
+	}
+}

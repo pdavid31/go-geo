@@ -158,3 +158,12 @@ func (l LineString) IsClosed() bool {
 
 	return reflect.DeepEqual(start, end)
 }
+
+/* LINESTRING */
+func (l LineString) NumPoints() int {
+	return len(l)
+}
+
+func (l LineString) PointN(n int) Point {
+	return l[n]
+}
