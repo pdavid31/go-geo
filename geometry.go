@@ -25,17 +25,17 @@ type Geometry interface {
 	Equals(another Geometry) bool
 	// Disjoint returns true if this geometric object is "spatially disjoint" from another Geometry
 	Disjoint(another Geometry) bool
-	// Intersects returns true if this geometric object "spatially intersects" another Geometry
+	// Intersects returns true if this geometric object is "spatially intersects" another Geometry
 	Intersects(another Geometry) bool
-	// Touches returns true if this geometric object "spatially touches" another Geometry
+	// Touches returns true if this geometric object is "spatially touches" another Geometry
 	Touches(another Geometry) bool
-	// Crosses returns true if this geometric object "spatially crosses" another Geometry
+	// Crosses returns true if this geometric object is "spatially crosses" another Geometry
 	Crosses(another Geometry) bool
-	// Within returns true if this geometric object "spatially within" another Geometry
+	// Within returns true if this geometric object is "spatially within" another Geometry
 	Within(another Geometry) bool
-	// Contains returns true if this geometric object "spatially contains" another Geometry
+	// Contains returns true if this geometric object is "spatially contains" another Geometry
 	Contains(another Geometry) bool
-	// Overlaps returns true if this geometric object "spatially overlaps" another Geometry
+	// Overlaps returns true if this geometric object is "spatially overlaps" another Geometry
 	Overlaps(another Geometry) bool
 
 	/* ANALYSIS */
