@@ -131,5 +131,5 @@ func (m MultiPoint) NumGeometries() int {
 }
 
 func (m MultiPoint) GeometryN(n int) Geometry {
-	return &m[n]
+	return m[n]
 }
