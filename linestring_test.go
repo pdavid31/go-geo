@@ -57,6 +57,17 @@ func TestLineString_Is3D(t *testing.T) {
 	}
 }
 
+func TestLineString_Distance(t *testing.T) {
+	p3 := NewPoint(2, 2, 2)
+	p4 := NewPoint(3, 3, 3)
+
+	ls2 := NewLineString(p3, p4)
+
+	if ls.Distance(ls2) != 4.330127018922194 {
+		t.Error("LineString Distance failed")
+	}
+}
+
 func TestLineString_Length(t *testing.T) {
 	correctLength := math.Sqrt(offset * 3)
 	if ls.Length() != correctLength {

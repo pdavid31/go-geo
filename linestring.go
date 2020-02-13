@@ -2,6 +2,7 @@ package geo
 
 import (
 	"fmt"
+	"math"
 	"reflect"
 	"strings"
 )
@@ -161,7 +162,13 @@ func (l LineString) Overlaps(another Geometry) bool {
 }
 
 func (l LineString) Distance(another Geometry) float64 {
-	panic("implement me")
+	// TODO: Switch to shortest distance between two lines instead of centroids
+	diffX := another.Lat() - p.Lat()
+	diffY := another.Lon() - p.Lon()
+	diffZ := another.Z() - p.Z()
+
+	distance := math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
+	return distance
 }
 
 func (l LineString) Buffer(distance float64) Geometry {
