@@ -1,12 +1,12 @@
 package geo
 
 type Line struct {
-	Linestring
+	LineString
 }
 
 /* CONSTRUCTOR */
 func NewLine(p1, p2 *Point) Line {
-	l := Line{NewLinestring(p1, p2)}
+	l := Line{NewLineString(p1, p2)}
 
 	return l
 }

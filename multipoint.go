@@ -5,11 +5,11 @@ import (
 	"strings"
 )
 
-type Multipoint []Point
+type MultiPoint []Point
 
 /* CONSTRUCTOR */
-func NewMultipoint(points ...*Point) Multipoint {
-	mp := Multipoint{}
+func NewMultiPoint(points ...*Point) MultiPoint {
+	mp := MultiPoint{}
 
 	for _, p := range points {
 		mp = append(mp, *p)
@@ -19,19 +19,19 @@ func NewMultipoint(points ...*Point) Multipoint {
 }
 
 /* GEOMETRY */
-func (m Multipoint) GeometryType() string {
-	return "Multipoint"
+func (m MultiPoint) GeometryType() string {
+	return "MultiPoint"
 }
 
-func (m Multipoint) SRID() int {
+func (m MultiPoint) SRID() int {
 	return 4326
 }
 
-func (m Multipoint) Envelope() Geometry {
+func (m MultiPoint) Envelope() Geometry {
 	panic("implement me")
 }
 
-func (m Multipoint) AsText() string {
+func (m MultiPoint) AsText() string {
 	is3D := m.Is3D()
 	lastIndex := len(m) - 2
 	rep := strings.ToUpper(m.GeometryType()) + " ("
@@ -55,11 +55,11 @@ func (m Multipoint) AsText() string {
 	return rep
 }
 
-func (m Multipoint) IsEmpty() bool {
+func (m MultiPoint) IsEmpty() bool {
 	return len(m) == 0
 }
 
-func (m Multipoint) Is3D() bool {
+func (m MultiPoint) Is3D() bool {
 	for _, p := range m {
 		if !p.Is3D() {
 			return false
@@ -69,67 +69,67 @@ func (m Multipoint) Is3D() bool {
 	return true
 }
 
-func (m Multipoint) Equals(another Geometry) bool {
+func (m MultiPoint) Equals(another Geometry) bool {
 	panic("implement me")
 }
 
-func (m Multipoint) Disjoint(another Geometry) bool {
+func (m MultiPoint) Disjoint(another Geometry) bool {
 	panic("implement me")
 }
 
-func (m Multipoint) Intersects(another Geometry) bool {
+func (m MultiPoint) Intersects(another Geometry) bool {
 	panic("implement me")
 }
 
-func (m Multipoint) Touches(another Geometry) bool {
+func (m MultiPoint) Touches(another Geometry) bool {
 	panic("implement me")
 }
 
-func (m Multipoint) Crosses(another Geometry) bool {
+func (m MultiPoint) Crosses(another Geometry) bool {
 	panic("implement me")
 }
 
-func (m Multipoint) Within(another Geometry) bool {
+func (m MultiPoint) Within(another Geometry) bool {
 	panic("implement me")
 }
 
-func (m Multipoint) Contains(another Geometry) bool {
+func (m MultiPoint) Contains(another Geometry) bool {
 	panic("implement me")
 }
 
-func (m Multipoint) Overlaps(another Geometry) bool {
+func (m MultiPoint) Overlaps(another Geometry) bool {
 	panic("implement me")
 }
 
-func (m Multipoint) Distance(another Geometry) float64 {
+func (m MultiPoint) Distance(another Geometry) float64 {
 	panic("implement me")
 }
 
-func (m Multipoint) Buffer(distance float64) Geometry {
+func (m MultiPoint) Buffer(distance float64) Geometry {
 	panic("implement me")
 }
 
-func (m Multipoint) ConvexHull() Geometry {
+func (m MultiPoint) ConvexHull() Geometry {
 	panic("implement me")
 }
 
-func (m Multipoint) Intersection(another Geometry) Geometry {
+func (m MultiPoint) Intersection(another Geometry) Geometry {
 	panic("implement me")
 }
 
-func (m Multipoint) Union(another Geometry) Geometry {
+func (m MultiPoint) Union(another Geometry) Geometry {
 	panic("implement me")
 }
 
-func (m Multipoint) Difference(another Geometry) Geometry {
+func (m MultiPoint) Difference(another Geometry) Geometry {
 	panic("implement me")
 }
 
 /* GEOMETRYCOLLECTION */
-func (m Multipoint) NumGeometries() int {
+func (m MultiPoint) NumGeometries() int {
 	return len(m)
 }
 
-func (m Multipoint) GeometryN(n int) Geometry {
+func (m MultiPoint) GeometryN(n int) Geometry {
 	return &m[n]
 }
