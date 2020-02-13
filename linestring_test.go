@@ -9,6 +9,24 @@ import (
 
 var ls = NewLineString(p, p2)
 
+func TestLineString_Lat(t *testing.T) {
+	if ls.Lat() != (p.Lat()+p2.Lat())/2 {
+		t.Error("LineString Lat failed")
+	}
+}
+
+func TestLineString_Lon(t *testing.T) {
+	if ls.Lon() != (p.Lon()+p2.Lon())/2 {
+		t.Error("LineString Lon failed")
+	}
+}
+
+func TestLineString_Z(t *testing.T) {
+	if ls.Z() != (p.Z()+p2.Z())/2 {
+		t.Error("LineString Z failed")
+	}
+}
+
 func TestLineString_GeometryType(t *testing.T) {
 	if ls.GeometryType() != "LineString" {
 		t.Error("LineString GeometryType failed")
