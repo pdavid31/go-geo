@@ -2,6 +2,7 @@ package geo
 
 import (
 	"fmt"
+	"math"
 	"strings"
 )
 
@@ -140,9 +141,14 @@ func (p Point) Overlaps(another Geometry) bool {
 	panic("implement me")
 }
 
-// Distance calculates the distance between p and p2
+// Distance calculates the distance between p and another geometry
 func (p Point) Distance(another Geometry) float64 {
-	panic("implement me")
+	diffX := another.Lat() - p.Lat()
+	diffY := another.Lon() - p.Lon()
+	diffZ := another.Z() - p.Z()
+
+	distance := math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
+	return distance
 }
 
 func (p Point) Buffer(distance float64) Geometry {
