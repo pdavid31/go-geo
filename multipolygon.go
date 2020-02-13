@@ -27,11 +27,11 @@ func (m MultiPolygon) Z() float64 {
 }
 
 func (m MultiPolygon) GeometryType() string {
-	panic("implement me")
+	return "MultiPolygon"
 }
 
 func (m MultiPolygon) SRID() int {
-	panic("implement me")
+	return 4326
 }
 
 func (m MultiPolygon) Envelope() Geometry {
@@ -43,11 +43,17 @@ func (m MultiPolygon) AsText() string {
 }
 
 func (m MultiPolygon) IsEmpty() bool {
-	panic("implement me")
+	return len(m) == 0
 }
 
 func (m MultiPolygon) Is3D() bool {
-	panic("implement me")
+	for _, p := range m {
+		if !p.Is3D() {
+			return false
+		}
+	}
+
+	return true
 }
 
 func (m MultiPolygon) Equals(another Geometry) bool {
