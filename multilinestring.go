@@ -27,11 +27,11 @@ func (m MultiLineString) Z() float64 {
 }
 
 func (m MultiLineString) GeometryType() string {
-	panic("implement me")
+	return "MultiLineString"
 }
 
 func (m MultiLineString) SRID() int {
-	panic("implement me")
+	return 4326
 }
 
 func (m MultiLineString) Envelope() Geometry {
@@ -43,11 +43,17 @@ func (m MultiLineString) AsText() string {
 }
 
 func (m MultiLineString) IsEmpty() bool {
-	panic("implement me")
+	return len(m) == 0
 }
 
 func (m MultiLineString) Is3D() bool {
-	panic("implement me")
+	for _, ls := range m {
+		if !ls.Is3D() {
+			return false
+		}
+	}
+
+	return true
 }
 
 func (m MultiLineString) Equals(another Geometry) bool {

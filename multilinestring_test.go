@@ -7,6 +7,30 @@ import (
 
 var mls = NewMultiLineString(ls)
 
+func TestMultiLineString_GeometryType(t *testing.T) {
+	if mls.GeometryType() != "MultiLineString" {
+		t.Error("MultiLineString GeometryType failed")
+	}
+}
+
+func TestMultiLineString_SRID(t *testing.T) {
+	if mls.SRID() != 4326 {
+		t.Error("MultiLineString SRID failed")
+	}
+}
+
+func TestMultiLineString_IsEmpty(t *testing.T) {
+	if mls.IsEmpty() {
+		t.Error("MultiLineString IsEmpty failed")
+	}
+}
+
+func TestMultiLineString_Is3D(t *testing.T) {
+	if !mls.Is3D() {
+		t.Error("MultiLineString Is3D failed")
+	}
+}
+
 func TestMultiLineString_NumGeometries(t *testing.T) {
 	if mls.NumGeometries() != 1 {
 		t.Error("MultiLineString NumGeometries failed")
