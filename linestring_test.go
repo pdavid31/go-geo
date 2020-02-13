@@ -47,13 +47,13 @@ func TestLineString_Length(t *testing.T) {
 }
 
 func TestLineString_StartPoint(t *testing.T) {
-	if !reflect.DeepEqual(ls.StartPoint(), *p) {
+	if !reflect.DeepEqual(ls.StartPoint(), p) {
 		t.Error("LineString StartPoint failed")
 	}
 }
 
 func TestLineString_EndPoint(t *testing.T) {
-	if !reflect.DeepEqual(ls.EndPoint(), *p2) {
+	if !reflect.DeepEqual(ls.EndPoint(), p2) {
 		t.Error("LineString StartPoint failed")
 	}
 }
@@ -76,7 +76,7 @@ func TestLineString_NumPoints(t *testing.T) {
 }
 
 func TestLineString_PointN(t *testing.T) {
-	if !reflect.DeepEqual(ls.PointN(0), *p) {
+	if !reflect.DeepEqual(ls.PointN(0), p) {
 		t.Error("LineString PointN failed")
 	}
 }
