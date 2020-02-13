@@ -40,9 +40,15 @@ func TestLineString_Is3D(t *testing.T) {
 }
 
 func TestLineString_Length(t *testing.T) {
-	correctLength := math.Sqrt(offset * 2)
+	correctLength := math.Sqrt(offset * 3)
 	if ls.Length() != correctLength {
 		t.Error("LineString Length failed")
+	}
+
+	ls2 := NewLineString(p, p2, p)
+	correctLength = correctLength * 2
+	if ls2.Length() != correctLength {
+		t.Error("LineString IsClosed failed")
 	}
 }
 
