@@ -18,7 +18,7 @@ type Point struct {
 }
 
 /* CONSTRUCTOR */
-func NewPoint(params ...float64) *Point {
+func NewPoint(params ...float64) Point {
 	x := params[0]
 	y := params[1]
 
@@ -32,7 +32,7 @@ func NewPoint(params ...float64) *Point {
 		m = params[3]
 	}
 
-	return &Point{x: x, y: y, z: z, m: m}
+	return Point{x: x, y: y, z: z, m: m}
 }
 
 /* GEOMETRY */
