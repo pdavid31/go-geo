@@ -108,18 +108,30 @@ func (m MultiLineString) Difference(another Geometry) Geometry {
 
 /* GEOMETRYCOLLECTION */
 func (m MultiLineString) NumGeometries() int {
-	panic("implement me")
+	return len(m)
 }
 
 func (m MultiLineString) GeometryN(n int) Geometry {
-	panic("implement me")
+	return m[n]
 }
 
 /* CURVE */
 func (m MultiLineString) Length() float64 {
-	panic("implement me")
+	sum := 0.0
+
+	for _, ls := range m {
+		sum += ls.Length()
+	}
+
+	return sum
 }
 
-func (m MultiLineString) IsClosed() {
-	panic("implement me")
+func (m MultiLineString) IsClosed() bool {
+	for _, ls := range m {
+		if !ls.IsClosed() {
+			return false
+		}
+	}
+
+	return true
 }
