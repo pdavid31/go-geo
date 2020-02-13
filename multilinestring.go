@@ -3,11 +3,11 @@ package geo
 type MultiLineString []LineString
 
 /* CONSTRUCTOR */
-func NewMultiLineString(linestrings ...*LineString) MultiLineString {
+func NewMultiLineString(linestrings ...LineString) MultiLineString {
 	mls := MultiLineString{}
 
 	for _, ls := range linestrings {
-		mls = append(mls, *ls)
+		mls = append(mls, ls)
 	}
 
 	return mls
