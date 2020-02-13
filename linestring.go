@@ -163,9 +163,10 @@ func (l LineString) Overlaps(another Geometry) bool {
 
 func (l LineString) Distance(another Geometry) float64 {
 	// TODO: Switch to shortest distance between two lines instead of centroids
-	diffX := another.Lat() - p.Lat()
-	diffY := another.Lon() - p.Lon()
-	diffZ := another.Z() - p.Z()
+	// See: https://stackoverflow.com/questions/38514607/find-shortest-path-from-one-line-to-other-in-shapely/38997756#38997756
+	diffX := another.Lat() - l.Lat()
+	diffY := another.Lon() - l.Lon()
+	diffZ := another.Z() - l.Z()
 
 	distance := math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
 	return distance
