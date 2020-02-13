@@ -2,12 +2,12 @@ package geo
 
 import "reflect"
 
-type Linearring struct {
+type LinearRing struct {
 	Linestring
 }
 
 /* CONSTRUCTOR */
-func NewLinearring(points ...*Point) Linearring {
+func NewLinearRing(points ...*Point) LinearRing {
 	firstPoint := points[0]
 	lastPoint := points[len(points)-1]
 
@@ -16,12 +16,12 @@ func NewLinearring(points ...*Point) Linearring {
 		points = append(points, firstPoint)
 	}
 
-	l := Linearring{NewLinestring(points...)}
+	l := LinearRing{NewLinestring(points...)}
 
 	return l
 }
 
 /* GEOMETRY */
-func (l Linearring) GeometryType() string {
-	return "Linearring"
+func (l LinearRing) GeometryType() string {
+	return "LinearRing"
 }

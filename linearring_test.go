@@ -4,16 +4,16 @@ import (
 	"testing"
 )
 
-var lr = NewLinearring(p, p2)
+var lr = NewLinearRing(p, p2)
 
-func TestLinearring_GeometryType(t *testing.T) {
-	if lr.GeometryType() != "Linearring" {
-		t.Error("Linearring GeometryType failed")
+func TestLinearRing_GeometryType(t *testing.T) {
+	if lr.GeometryType() != "LinearRing" {
+		t.Error("LinearRing GeometryType failed")
 	}
 }
 
-func TestLinearring_IsClosed(t *testing.T) {
+func TestLinearRing_IsClosed(t *testing.T) {
 	if !lr.IsClosed() {
-		t.Error("Linearring IsClosed failed")
+		t.Error("LinearRing IsClosed failed")
 	}
 }
