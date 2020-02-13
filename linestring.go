@@ -194,7 +194,7 @@ func (l LineString) Difference(another Geometry) Geometry {
 
 /* CURVE */
 func (l LineString) Length() float64 {
-	length := 0.
+	length := 0.0
 	lastIndex := len(l) - 1
 
 	for i := range l {
