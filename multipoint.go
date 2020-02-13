@@ -19,6 +19,18 @@ func NewMultiPoint(points ...Point) MultiPoint {
 }
 
 /* GEOMETRY */
+func (m MultiPoint) Lat() float64 {
+	panic("implement me")
+}
+
+func (m MultiPoint) Lon() float64 {
+	panic("implement me")
+}
+
+func (m MultiPoint) Z() float64 {
+	panic("implement me")
+}
+
 func (m MultiPoint) GeometryType() string {
 	return "MultiPoint"
 }
