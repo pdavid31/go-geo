@@ -21,15 +21,61 @@ func NewLineString(points ...Point) LineString {
 
 /* GEOMETRY */
 func (l LineString) Lat() float64 {
-	panic("implement me")
+	// see: https://www.ae.msstate.edu/vlsm/shape/centroid_of_a_line/example_1.htm
+	topSum := 0.0
+	bottomSum := 0.0
+
+	for i := 0; i < len(l)-1; i++ {
+		firstPoint := l[i]
+		successorPoint := l[i+1]
+
+		length := firstPoint.Distance(successorPoint)
+		mid := (firstPoint.Lat() + successorPoint.Lat()) / 2
+
+		topSum += length * mid
+		bottomSum += length
+	}
+
+	x := topSum / bottomSum
+	return x
 }
 
 func (l LineString) Lon() float64 {
-	panic("implement me")
+	topSum := 0.0
+	bottomSum := 0.0
+
+	for i := 0; i < len(l)-1; i++ {
+		firstPoint := l[i]
+		successorPoint := l[i+1]
+
+		length := firstPoint.Distance(successorPoint)
+		mid := (firstPoint.Lon() + successorPoint.Lon()) / 2
+
+		topSum += length * mid
+		bottomSum += length
+	}
+
+	y := topSum / bottomSum
+	return y
 }
 
 func (l LineString) Z() float64 {
-	panic("implement me")
+	topSum := 0.0
+	bottomSum := 0.0
+
+	for i := 0; i < len(l)-1; i++ {
+		firstPoint := l[i]
+		successorPoint := l[i+1]
+
+		length := firstPoint.Distance(successorPoint)
+		mid := (firstPoint.Z() + successorPoint.Z()) / 2
+
+		topSum += length * mid
+		bottomSum += length
+	}
+
+	z := topSum / bottomSum
+	return z
 }
 
 func (l LineString) GeometryType() string {
