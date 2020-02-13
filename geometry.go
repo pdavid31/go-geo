@@ -2,9 +2,9 @@ package geo
 
 type Geometry interface {
 	// TODO: add complete simple feature model
-	Lat()
-	Lon()
-	Z()
+	Lat() float64
+	Lon() float64
+	Z() float64
 
 	/* MISC */
 	// GeometryType returns subtype of geometry
