@@ -48,7 +48,7 @@ func TestPoint_Is3D(t *testing.T) {
 // TODO: test overlaps
 
 func TestPoint_Distance(t *testing.T) {
-	correctDistance := math.Sqrt(offset * 2)
+	correctDistance := math.Sqrt(offset * 3)
 
 	distance := p.Distance(p2)
 	if distance != correctDistance {
