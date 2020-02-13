@@ -138,7 +138,7 @@ func (l LineString) Length() float64 {
 
 		current := l[i]
 		successor := l[i+1]
-		length += current.Distance(&successor)
+		length += current.Distance(successor)
 	}
 
 	return length
