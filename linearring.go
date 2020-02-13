@@ -7,7 +7,7 @@ type LinearRing struct {
 }
 
 /* CONSTRUCTOR */
-func NewLinearRing(points ...*Point) LinearRing {
+func NewLinearRing(points ...Point) LinearRing {
 	firstPoint := points[0]
 	lastPoint := points[len(points)-1]
 

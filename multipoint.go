@@ -8,11 +8,11 @@ import (
 type MultiPoint []Point
 
 /* CONSTRUCTOR */
-func NewMultiPoint(points ...*Point) MultiPoint {
+func NewMultiPoint(points ...Point) MultiPoint {
 	mp := MultiPoint{}
 
 	for _, p := range points {
-		mp = append(mp, *p)
+		mp = append(mp, p)
 	}
 
 	return mp

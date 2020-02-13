@@ -9,11 +9,11 @@ import (
 type LineString []Point
 
 /* CONSTRUCTOR */
-func NewLineString(points ...*Point) LineString {
+func NewLineString(points ...Point) LineString {
 	ls := LineString{}
 
 	for _, p := range points {
-		ls = append(ls, *p)
+		ls = append(ls, p)
 	}
 
 	return ls
