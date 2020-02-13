@@ -1,9 +1,9 @@
 package geo
 
 const (
-	lat float64 = 53.559073
-	lon float64 = 13.264618
-	z   float64 = 20
+	lat float64 = 0
+	lon float64 = 0
+	z   float64 = 0
 
 	offset float64 = 1.0
 
