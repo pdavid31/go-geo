@@ -121,7 +121,7 @@ func (m MultiLineString) GeometryN(n int) Geometry {
 	return m[n]
 }
 
-/* CURVE */
+/* MULTICURVE */
 func (m MultiLineString) Length() float64 {
 	sum := 0.0
 
