@@ -6,46 +6,46 @@ import (
 	"testing"
 )
 
-var mp = NewMultipoint(p, p2)
+var mp = NewMultiPoint(p, p2)
 
-func TestMultipoint_GeometryType(t *testing.T) {
-	if mp.GeometryType() != "Multipoint" {
-		t.Error("Multipoint GeometryType failed")
+func TestMultiPoint_GeometryType(t *testing.T) {
+	if mp.GeometryType() != "MultiPoint" {
+		t.Error("MultiPoint GeometryType failed")
 	}
 }
 
-func TestMultipoint_SRID(t *testing.T) {
+func TestMultiPoint_SRID(t *testing.T) {
 	if mp.SRID() != 4326 {
-		t.Error("Multipoint SRID failed")
+		t.Error("MultiPoint SRID failed")
 	}
 }
 
-func TestMultipoint_AsText(t *testing.T) {
+func TestMultiPoint_AsText(t *testing.T) {
 	if mp.AsText() != fmt.Sprintf("MULTIPOINT (%f %f %f, %f %f %f)", p.x, p.y, p.z, p2.x, p2.y, p2.z) {
-		t.Error("Multipoint AsText failed")
+		t.Error("MultiPoint AsText failed")
 	}
 }
 
-func TestMultipoint_IsEmpty(t *testing.T) {
+func TestMultiPoint_IsEmpty(t *testing.T) {
 	if mp.IsEmpty() {
-		t.Error("Multipoint IsEmpty failed")
+		t.Error("MultiPoint IsEmpty failed")
 	}
 }
 
-func TestMultipoint_Is3D(t *testing.T) {
+func TestMultiPoint_Is3D(t *testing.T) {
 	if !mp.Is3D() {
-		t.Error("Multipoint Is3D failed")
+		t.Error("MultiPoint Is3D failed")
 	}
 }
 
-func TestMultipoint_NumGeometries(t *testing.T) {
+func TestMultiPoint_NumGeometries(t *testing.T) {
 	if len(mp) != 2 {
-		t.Error("Multipoint NumGeometries failex^d")
+		t.Error("MultiPoint NumGeometries failex^d")
 	}
 }
 
-func TestMultipoint_GeometryN(t *testing.T) {
+func TestMultiPoint_GeometryN(t *testing.T) {
 	if !reflect.DeepEqual(mp.GeometryN(0), p) {
-		t.Error("Multipoint GeometryN failed")
+		t.Error("MultiPoint GeometryN failed")
 	}
 }
