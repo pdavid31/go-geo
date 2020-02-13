@@ -20,6 +20,18 @@ func NewLineString(points ...Point) LineString {
 }
 
 /* GEOMETRY */
+func (l LineString) Lat() float64 {
+	panic("implement me")
+}
+
+func (l LineString) Lon() float64 {
+	panic("implement me")
+}
+
+func (l LineString) Z() float64 {
+	panic("implement me")
+}
+
 func (l LineString) GeometryType() string {
 	return "LineString"
 }
