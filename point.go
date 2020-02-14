@@ -141,7 +141,6 @@ func (p Point) Overlaps(another Geometry) bool {
 	panic("implement me")
 }
 
-// Distance calculates the distance between p and another geometry
 func (p Point) Distance(another Geometry) float64 {
 	diffX := another.Lat() - p.Lat()
 	diffY := another.Lon() - p.Lon()
