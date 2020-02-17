@@ -21,11 +21,7 @@ func TestPoint_SRID(t *testing.T) {
 // TODO: test envelope
 
 func TestPoint_AsText(t *testing.T) {
-	x := fmt.Sprintf("%f", lat)
-	y := fmt.Sprintf("%f", lon)
-	zStr := fmt.Sprintf("%f", z)
-
-	if p.AsText() != "POINT Z ("+x+" "+y+" "+zStr+")" {
+	if p.AsText() != fmt.Sprintf("POINT Z (%f %f %f)", p.Lat(), p.Lon(), p.Z()) {
 		t.Error("Point AsText failed")
 	}
 }
