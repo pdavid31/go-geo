@@ -1,5 +1,10 @@
 package geo
 
+import (
+	"fmt"
+	"strings"
+)
+
 type Polygon []LinearRing
 
 /* CONSTRUCTOR */
@@ -39,7 +44,38 @@ func (p Polygon) Envelope() Geometry {
 }
 
 func (p Polygon) AsText() string {
-	panic("implement me")
+	// examples:
+	// POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))
+	// POLYGON ((35 10, 45 45, 15 40, 10 20, 35 10), (20 30, 35 35, 30 20, 20 30))
+	rep := strings.ToUpper(p.GeometryType()) + " ("
+
+	lastRing := len(p) - 1
+	for i, lr := range p {
+		rep += "("
+
+		lastPoint := len(lr.LineString) - 1
+		for j, point := range lr.LineString {
+			rep += fmt.Sprintf("%f %f", point.Lat(), point.Lon())
+
+			if point.Is3D() {
+				rep += fmt.Sprintf(" %f", point.Z())
+			}
+
+			if j != lastPoint {
+				rep += ", "
+			}
+		}
+
+		rep += ")"
+
+		if i != lastRing {
+			rep += ", "
+		}
+	}
+
+	rep += ")"
+
+	return rep
 }
 
 func (p Polygon) IsEmpty() bool {

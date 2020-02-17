@@ -18,6 +18,12 @@ func TestPolygon_SRID(t *testing.T) {
 	}
 }
 
+func TestPolygon_AsText(t *testing.T) {
+	if poly.AsText() != "POLYGON ((0.000000 0.000000 0.000000, 1.000000 1.000000 1.000000, 0.000000 0.000000 0.000000))" {
+		t.Error("Polygon AsText failed")
+	}
+}
+
 func TestPolygon_IsEmpty(t *testing.T) {
 	if poly.IsEmpty() {
 		t.Error("Polygon IsEmpty failed")
