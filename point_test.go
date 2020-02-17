@@ -38,7 +38,16 @@ func TestPoint_Is3D(t *testing.T) {
 	}
 }
 
-// TODO: test equals
+func TestPoint_Equals(t *testing.T) {
+	if !p.Equals(p) {
+		t.Error("Point Equals failed")
+	}
+
+	if p.Equals(p2) {
+		t.Error("Point Equals failed")
+	}
+}
+
 // TODO: test disjoint
 // TODO: test intersects
 // TODO: test touches

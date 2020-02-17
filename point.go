@@ -3,6 +3,7 @@ package geo
 import (
 	"fmt"
 	"math"
+	"reflect"
 	"strings"
 )
 
@@ -110,7 +111,13 @@ func (p Point) Is3D() bool {
 }
 
 func (p Point) Equals(another Geometry) bool {
-	panic("implement me")
+	// check if given geometry is a point
+	switch another.(type) {
+	case Point:
+		return reflect.DeepEqual(p, another)
+	default:
+		return false
+	}
 }
 
 func (p Point) Disjoint(another Geometry) bool {
