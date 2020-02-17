@@ -126,7 +126,7 @@ func (p Polygon) PointOnSurface() Point {
 }
 
 /* POLYGON */
-func (p Polygon) ExteriorRing() LineString {
+func (p Polygon) ExteriorRing() LinearRing {
 	panic("implement me")
 }
 
@@ -134,6 +134,6 @@ func (p Polygon) NumInteriorRing() int {
 	panic("implement me")
 }
 
-func (p Polygon) InteriorRingN(n int) LineString {
+func (p Polygon) InteriorRingN(n int) LinearRing {
 	panic("implement me")
 }
