@@ -77,8 +77,8 @@ func (p Point) AsText() string {
 	}
 
 	lastCharacter := rep[len(rep)-1:]
-	lastValueisWhitespace := lastCharacter == " "
-	if !lastValueisWhitespace {
+	lastValueIsWhitespace := lastCharacter == " "
+	if !lastValueIsWhitespace {
 		rep += " "
 	}
 
