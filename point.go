@@ -153,8 +153,7 @@ func (p Point) Distance(another Geometry) float64 {
 	diffY := another.Lon() - p.Lon()
 	diffZ := another.Z() - p.Z()
 
-	distance := math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
-	return distance
+	return math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
 }
 
 func (p Point) Buffer(distance float64) Geometry {
