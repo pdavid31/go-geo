@@ -130,7 +130,13 @@ func (l LineString) Is3D() bool {
 }
 
 func (l LineString) Equals(another Geometry) bool {
-	panic("implement me")
+	// check if given geometry is a point
+	switch another.(type) {
+	case LineString, Line, LinearRing:
+		return reflect.DeepEqual(l, another)
+	default:
+		return false
+	}
 }
 
 func (l LineString) Disjoint(another Geometry) bool {

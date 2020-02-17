@@ -57,6 +57,20 @@ func TestLineString_Is3D(t *testing.T) {
 	}
 }
 
+func TestLineString_Equals(t *testing.T) {
+	if !ls.Equals(ls) {
+		t.Error("LineString Equals failed")
+	}
+
+	if !ls.Equals(l.LineString) {
+		t.Error("LineString Equals failed")
+	}
+
+	if ls.Equals(lr.LineString) {
+		t.Error("LineString Equals failed")
+	}
+}
+
 func TestLineString_Distance(t *testing.T) {
 	p3 := NewPoint(2, 1, 1)
 	p4 := NewPoint(3, 0, 0)
