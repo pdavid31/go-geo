@@ -1,6 +1,7 @@
 package geo
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -19,7 +20,7 @@ func TestPolygon_SRID(t *testing.T) {
 }
 
 func TestPolygon_AsText(t *testing.T) {
-	if poly.AsText() != "POLYGON ((0.000000 0.000000 0.000000, 1.000000 1.000000 1.000000, 0.000000 0.000000 0.000000))" {
+	if poly.AsText() != fmt.Sprintf("POLYGON ((%f %f %f, %f %f %f, %f %f %f))", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z(), p.Lat(), p.Lon(), p.Z()) {
 		t.Error("Polygon AsText failed")
 	}
 }
