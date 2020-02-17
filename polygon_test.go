@@ -36,3 +36,9 @@ func TestPolygon_Is3D(t *testing.T) {
 		t.Error("Polygon Is3D failed")
 	}
 }
+
+func TestPolygon_Equals(t *testing.T) {
+	if !poly.Equals(poly) {
+		t.Error("Polygon Equals failed")
+	}
+}

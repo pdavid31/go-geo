@@ -2,6 +2,7 @@ package geo
 
 import (
 	"fmt"
+	"reflect"
 	"strings"
 )
 
@@ -93,7 +94,14 @@ func (p Polygon) Is3D() bool {
 }
 
 func (p Polygon) Equals(another Geometry) bool {
-	panic("implement me")
+	// TODO: add case of unordered slices
+	// check if given geometry is a point
+	switch another.(type) {
+	case Polygon:
+		return reflect.DeepEqual(p, another)
+	default:
+		return false
+	}
 }
 
 func (p Polygon) Disjoint(another Geometry) bool {
