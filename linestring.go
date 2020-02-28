@@ -152,18 +152,7 @@ func (l LineString) Touches(another Geometry) bool {
 }
 
 func (l LineString) Crosses(another Geometry) bool {
-	// get bounding boxes of geometries
-	bbL := l.Envelope()
-	bbA := another.Envelope()
-
-	// check if bounding boxes intersect
-	if !bbL.Intersects(bbA) {
-		return false
-	}
-
-	// check if geometries itself intersect
-
-	return true
+	panic("implement me")
 }
 
 func (l LineString) Within(another Geometry) bool {
