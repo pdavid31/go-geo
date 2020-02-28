@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	NullValue = -9999.9
+	NullValue = -999999.9
 )
 
 type Point struct {
@@ -20,20 +20,29 @@ type Point struct {
 
 /* CONSTRUCTOR */
 func NewPoint(params ...float64) Point {
-	x := params[0]
-	y := params[1]
+	var p Point
 
-	z := NullValue
+	p.x = NullValue
+	p.y = NullValue
+	p.z = NullValue
+	p.m = NullValue
+
+	if len(params) < 2 {
+		return p
+	}
+
+	p.x = params[0]
+	p.y = params[1]
+
 	if len(params) > 2 {
-		z = params[2]
+		p.z = params[2]
 	}
 
-	m := NullValue
 	if len(params) > 3 {
-		m = params[3]
+		p.m = params[3]
 	}
 
-	return Point{x: x, y: y, z: z, m: m}
+	return p
 }
 
 /* GEOMETRY */
@@ -54,7 +63,6 @@ func (p Point) GeometryType() string {
 }
 
 func (p Point) SRID() int {
-	// TODO: implement
 	return 4326
 }
 
@@ -64,7 +72,6 @@ func (p Point) Envelope() Geometry {
 }
 
 func (p Point) AsText() string {
-	// TODO: implement
 	// example POINT ZM (1 1 5 60)
 	rep := strings.ToUpper(p.GeometryType()) + " "
 
@@ -102,8 +109,7 @@ func (p Point) AsText() string {
 }
 
 func (p Point) IsEmpty() bool {
-	// TODO: implement
-	return false
+	return p.x == NullValue || p.y == NullValue
 }
 
 func (p Point) Is3D() bool {

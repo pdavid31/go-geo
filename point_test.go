@@ -26,7 +26,16 @@ func TestPoint_AsText(t *testing.T) {
 	}
 }
 
-// TODO: test isempty
+func TestPoint_IsEmpty(t *testing.T) {
+	if p.IsEmpty() {
+		t.Error("Point IsEmpty failed")
+	}
+
+	p3 := NewPoint()
+	if !p3.IsEmpty() {
+		t.Error("Point IsEmpty failed")
+	}
+}
 
 func TestPoint_Is3D(t *testing.T) {
 	if !p.Is3D() {
