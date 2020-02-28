@@ -4,7 +4,7 @@ type MultiPolygon []Polygon
 
 /* CONSTRUCTOR */
 func NewMultiPolygon(polygons ...Polygon) MultiPolygon {
-	mpoly := MultiPolygon{}
+	var mpoly MultiPolygon
 
 	for _, poly := range polygons {
 		mpoly = append(mpoly, poly)

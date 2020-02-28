@@ -4,7 +4,7 @@ type MultiLineString []LineString
 
 /* CONSTRUCTOR */
 func NewMultiLineString(linestrings ...LineString) MultiLineString {
-	mls := MultiLineString{}
+	var mls MultiLineString
 
 	for _, ls := range linestrings {
 		mls = append(mls, ls)

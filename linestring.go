@@ -11,7 +11,7 @@ type LineString []Point
 
 /* CONSTRUCTOR */
 func NewLineString(points ...Point) LineString {
-	ls := LineString{}
+	var ls LineString
 
 	for _, p := range points {
 		ls = append(ls, p)

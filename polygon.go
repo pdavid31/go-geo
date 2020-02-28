@@ -10,7 +10,7 @@ type Polygon []LinearRing
 
 /* CONSTRUCTOR */
 func NewPolygon(linearrings ...LinearRing) Polygon {
-	poly := Polygon{}
+	var poly Polygon
 
 	for _, lr := range linearrings {
 		poly = append(poly, lr)

@@ -6,7 +6,9 @@ type Line struct {
 
 /* CONSTRUCTOR */
 func NewLine(p1, p2 Point) Line {
-	l := Line{NewLineString(p1, p2)}
+	var l Line
+
+	l.LineString = NewLineString(p1, p2)
 
 	return l
 }
