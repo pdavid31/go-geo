@@ -155,6 +155,7 @@ func (p Point) Overlaps(another Geometry) bool {
 }
 
 func (p Point) Distance(another Geometry) float64 {
+	// euclidean distance
 	diffX := another.Lat() - p.Lat()
 	diffY := another.Lon() - p.Lon()
 	diffZ := another.Z() - p.Z()
