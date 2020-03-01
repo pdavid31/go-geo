@@ -67,8 +67,9 @@ func distancePointToLineString(p Point, c Curve) float64 {
 
 	minDist := math.MaxFloat64
 
-	for i := range ls {
-		dist := distancePointToSegment(p, ls[i], ls[i+1])
+	numPoints := ls.NumPoints()
+	for i := 0; i < numPoints-1; i++ {
+		dist := distancePointToSegment(p, ls.PointN(i), ls.PointN(i+1))
 
 		if dist < minDist {
 			minDist = dist
