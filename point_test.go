@@ -69,7 +69,7 @@ func TestPoint_Distance(t *testing.T) {
 	}
 
 	lineString := NewLineString(NewPoint(p.Lat()-offset, p.Lon()+offset, 0), NewPoint(p.Lat()+offset, p.Lon()+offset, 0))
-	if dToL := p.Distance(lineString); dToL != 1 {
+	if dToL := p.Distance(lineString); dToL != offset {
 		t.Errorf("Point Distance (to LineString) failed - expected: %f, got: %f", offset, dToL)
 	}
 
