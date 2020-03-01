@@ -159,22 +159,20 @@ func (p Point) Distance(another Geometry) float64 {
 	case Point:
 		p2 := another.(Point)
 
-		return distancePointToPoint(p, p2)
-	case Line, LineString, LinearRing:
+		// euclidean distance
+		diffX := p2.Lat() - p.Lat()
+		diffY := p2.Lon() - p.Lon()
+		diffZ := p2.Z() - p.Z()
+
+		return math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
+	case Curve:
 		ls := another.(LineString)
-
-		return distancePointToLineString(p, ls)
-	case Polygon:
-		pg := another.(Polygon)
-
-		return distancePointToPoly(p, pg)
-	case MultiPoint:
-		mp := another.(MultiPoint)
 
 		minDist := math.MaxFloat64
 
-		for _, p2 := range mp {
-			dist := p.Distance(p2)
+		numPoints := ls.NumPoints()
+		for i := 0; i < numPoints-1; i++ {
+			dist := distancePointToSegment(p, ls.PointN(i), ls.PointN(i+1))
 
 			if dist < minDist {
 				minDist = dist
@@ -182,10 +180,35 @@ func (p Point) Distance(another Geometry) float64 {
 		}
 
 		return minDist
-	case MultiLineString:
-		return 0
-	case MultiPolygon:
-		return 0
+	case Polygon:
+		pg := another.(Polygon)
+
+		minDist := math.MaxFloat64
+
+		for _, lr := range pg {
+			dist := p.Distance(lr)
+
+			if dist < minDist {
+				minDist = dist
+			}
+		}
+
+		return minDist
+	case GeometryCollection:
+		gm := another.(GeometryCollection)
+
+		minDist := math.MaxFloat64
+
+		numGeoms := gm.NumGeometries()
+		for i := 0; i < numGeoms-1; i++ {
+			dist := p.Distance(gm.GeometryN(i))
+
+			if dist < minDist {
+				minDist = dist
+			}
+		}
+
+		return minDist
 	default:
 		return 0
 	}

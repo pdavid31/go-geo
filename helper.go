@@ -6,15 +6,6 @@ import (
 
 // see geos c++ library
 
-func distancePointToPoint(p1, p2 Point) float64 {
-	// euclidean distance
-	diffX := p2.Lat() - p1.Lat()
-	diffY := p2.Lon() - p1.Lon()
-	diffZ := p2.Z() - p1.Z()
-
-	return math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
-}
-
 // see: geos::algorithm::Distance::pointToSegment
 func distancePointToSegment(p, A, B Point) float64 {
 	// if start == end, use pt distance
@@ -60,35 +51,4 @@ func distancePointToSegment(p, A, B Point) float64 {
 	s := ((A.Lon()-p.Lon())*(B.Lat()-A.Lat()) - (A.Lat()-p.Lat())*(B.Lon()-A.Lon())) / ((B.Lat()-A.Lat())*(B.Lat()-A.Lat()) + (B.Lon()-A.Lon())*(B.Lon()-A.Lon()))
 
 	return math.Abs(s) * math.Sqrt((B.Lat()-A.Lat())*(B.Lat()-A.Lat())+(B.Lon()-A.Lon())*(B.Lon()-A.Lon()))
-}
-
-func distancePointToLineString(p Point, c Curve) float64 {
-	ls := c.(LineString)
-
-	minDist := math.MaxFloat64
-
-	numPoints := ls.NumPoints()
-	for i := 0; i < numPoints-1; i++ {
-		dist := distancePointToSegment(p, ls.PointN(i), ls.PointN(i+1))
-
-		if dist < minDist {
-			minDist = dist
-		}
-	}
-
-	return minDist
-}
-
-func distancePointToPoly(p Point, pg Polygon) float64 {
-	minDist := math.MaxFloat64
-
-	for _, lr := range pg {
-		dist := distancePointToLineString(p, lr)
-
-		if dist < minDist {
-			minDist = dist
-		}
-	}
-
-	return minDist
 }
