@@ -64,9 +64,13 @@ func TestPoint_Equals(t *testing.T) {
 func TestPoint_Distance(t *testing.T) {
 	correctDistance := math.Sqrt(offset * 3)
 
-	distance := p.Distance(p2)
-	if distance != correctDistance {
-		t.Errorf("Point Distance failed - expected: %f, got: %f", correctDistance, distance)
+	if dToP := p.Distance(p2); dToP != correctDistance {
+		t.Errorf("Point Distance (to Point) failed - expected: %f, got: %f", correctDistance, dToP)
+	}
+
+	lineString := NewLineString(NewPoint(p.Lat()-offset, p.Lon()+offset, 0), NewPoint(p.Lat()+offset, p.Lon()+offset, 0))
+	if dToL := p.Distance(lineString); dToL != 1 {
+		t.Errorf("Point Distance (to LineString) failed - expected: %f, got: %f", offset, dToL)
 	}
 }
 

@@ -155,12 +155,35 @@ func (p Point) Overlaps(another Geometry) bool {
 }
 
 func (p Point) Distance(another Geometry) float64 {
-	// euclidean distance
-	diffX := another.Lat() - p.Lat()
-	diffY := another.Lon() - p.Lon()
-	diffZ := another.Z() - p.Z()
+	switch another.(type) {
+	case Point:
+		// euclidean distance
+		diffX := another.Lat() - p.Lat()
+		diffY := another.Lon() - p.Lon()
+		diffZ := another.Z() - p.Z()
 
-	return math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
+		return math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
+	case Line, LineString, LinearRing:
+		line := another.(LineString)
+
+		minDist := math.MaxFloat64
+
+		numPoints := line.NumPoints()
+		for i := 0; i < numPoints-1; i++ {
+			current := line.PointN(i)
+			successor := line.PointN(i + 1)
+
+			dist := distancePointToSegment(p, current, successor)
+
+			if dist < minDist {
+				minDist = dist
+			}
+		}
+
+		return minDist
+	default:
+		return 0
+	}
 }
 
 func (p Point) Buffer(distance float64) Geometry {
