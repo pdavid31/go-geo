@@ -181,6 +181,14 @@ func (p Point) Distance(another Geometry) float64 {
 		}
 
 		return minDist
+	case Polygon:
+		return 0
+	case MultiPoint:
+		return 0
+	case MultiLineString:
+		return 0
+	case MultiPolygon:
+		return 0
 	default:
 		return 0
 	}
