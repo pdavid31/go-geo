@@ -68,3 +68,17 @@ func distancePointToLineString(p Point, c Curve) float64 {
 
 	return minDist
 }
+
+func distancePointToPoly(p Point, pg Polygon) float64 {
+	minDist := math.MaxFloat64
+
+	for _, lr := range pg {
+		dist := distancePointToLineString(p, lr)
+
+		if dist < minDist {
+			minDist = dist
+		}
+	}
+
+	return minDist
+}
