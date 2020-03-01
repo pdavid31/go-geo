@@ -168,12 +168,8 @@ func (p Point) Distance(another Geometry) float64 {
 
 		minDist := math.MaxFloat64
 
-		numPoints := line.NumPoints()
-		for i := 0; i < numPoints-1; i++ {
-			current := line.PointN(i)
-			successor := line.PointN(i + 1)
-
-			dist := distancePointToSegment(p, current, successor)
+		for i := range line {
+			dist := distancePointToSegment(p, line[i], line[i+1])
 
 			if dist < minDist {
 				minDist = dist
