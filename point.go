@@ -180,7 +180,19 @@ func (p Point) Distance(another Geometry) float64 {
 	case Polygon:
 		return 0
 	case MultiPoint:
-		return 0
+		mp := another.(MultiPoint)
+
+		minDist := math.MaxFloat64
+
+		for _, p2 := range mp {
+			dist := p.Distance(p2)
+
+			if dist < minDist {
+				minDist = dist
+			}
+		}
+
+		return minDist
 	case MultiLineString:
 		return 0
 	case MultiPolygon:
