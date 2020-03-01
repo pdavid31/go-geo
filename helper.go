@@ -52,3 +52,19 @@ func distancePointToSegment(p, A, B Point) float64 {
 
 	return math.Abs(s) * math.Sqrt((B.Lat()-A.Lat())*(B.Lat()-A.Lat())+(B.Lon()-A.Lon())*(B.Lon()-A.Lon()))
 }
+
+func distancePointToLineString(p Point, c Curve) float64 {
+	ls := c.(LineString)
+
+	minDist := math.MaxFloat64
+
+	for i := range ls {
+		dist := distancePointToSegment(p, ls[i], ls[i+1])
+
+		if dist < minDist {
+			minDist = dist
+		}
+	}
+
+	return minDist
+}

@@ -164,19 +164,9 @@ func (p Point) Distance(another Geometry) float64 {
 
 		return math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
 	case Line, LineString, LinearRing:
-		line := another.(LineString)
+		ls := another.(LineString)
 
-		minDist := math.MaxFloat64
-
-		for i := range line {
-			dist := distancePointToSegment(p, line[i], line[i+1])
-
-			if dist < minDist {
-				minDist = dist
-			}
-		}
-
-		return minDist
+		return distancePointToLineString(p, ls)
 	case Polygon:
 		return 0
 	case MultiPoint:
