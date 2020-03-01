@@ -157,18 +157,17 @@ func (p Point) Overlaps(another Geometry) bool {
 func (p Point) Distance(another Geometry) float64 {
 	switch another.(type) {
 	case Point:
-		// euclidean distance
-		diffX := another.Lat() - p.Lat()
-		diffY := another.Lon() - p.Lon()
-		diffZ := another.Z() - p.Z()
+		p2 := another.(Point)
 
-		return math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
+		return distancePointToPoint(p, p2)
 	case Line, LineString, LinearRing:
 		ls := another.(LineString)
 
 		return distancePointToLineString(p, ls)
 	case Polygon:
-		return 0
+		pg := another.(Polygon)
+
+		return distancePointToPoly(p, pg)
 	case MultiPoint:
 		mp := another.(MultiPoint)
 

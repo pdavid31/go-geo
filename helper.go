@@ -6,6 +6,15 @@ import (
 
 // see geos c++ library
 
+func distancePointToPoint(p1, p2 Point) float64 {
+	// euclidean distance
+	diffX := p2.Lat() - p1.Lat()
+	diffY := p2.Lon() - p1.Lon()
+	diffZ := p2.Z() - p1.Z()
+
+	return math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
+}
+
 // see: geos::algorithm::Distance::pointToSegment
 func distancePointToSegment(p, A, B Point) float64 {
 	// if start == end, use pt distance
