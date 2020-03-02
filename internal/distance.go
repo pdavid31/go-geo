@@ -1,8 +1,9 @@
 package internal
 
 import (
-	"github.com/pdavid31/geo"
 	"math"
+
+	"github.com/pdavid31/geo"
 )
 
 // see geos c++ library
