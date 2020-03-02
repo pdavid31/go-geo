@@ -3,7 +3,6 @@ package geo
 import (
 	"fmt"
 	"math"
-	"reflect"
 	"strings"
 )
 
@@ -119,7 +118,7 @@ func (p Point) Equals(another Geometry) bool {
 	// check if given geometry is a point
 	switch another.(type) {
 	case Point:
-		return reflect.DeepEqual(p, another)
+		return p.Lat() == another.Lat() && p.Lon() == another.Lon() && p.Z() == another.Z()
 	default:
 		return false
 	}
