@@ -52,6 +52,12 @@ func TestPoint_Equals(t *testing.T) {
 	}
 }
 
+func BenchmarkPoint_Equals(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		p.Equals(p2)
+	}
+}
+
 func TestPoint_Disjoint(t *testing.T) {
 	if p.Disjoint(p) || !p.Disjoint(p2) {
 		t.Error("Point Disjoint failed")
