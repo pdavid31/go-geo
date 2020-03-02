@@ -2,7 +2,6 @@ package geo
 
 import (
 	"fmt"
-	"math"
 	"testing"
 )
 
@@ -62,24 +61,25 @@ func TestPoint_Equals(t *testing.T) {
 // TODO: test overlaps
 
 func TestPoint_Distance(t *testing.T) {
-	correctDistance := math.Sqrt(offset * 3)
+	p3 := NewPoint(p.Lat(), p.Lon()+offset, 0)
+	p4 := NewPoint(p.Lat()+offset, p.Lon()+offset, 0)
 
-	if dToP := p.Distance(p2); dToP != correctDistance {
-		t.Errorf("Point Distance (to Point) failed - expected: %f, got: %f", correctDistance, dToP)
+	if dToP := p.Distance(p3); dToP != offset {
+		t.Errorf("Point Distance (to Point) failed - expected: %f, got: %f", offset, dToP)
 	}
 
-	lineString := NewLineString(NewPoint(p.Lat()-offset, p.Lon()+offset, 0), NewPoint(p.Lat()+offset, p.Lon()+offset, 0))
+	lineString := NewLineString(p3, p4)
 	if dToL := p.Distance(lineString); dToL != offset {
 		t.Errorf("Point Distance (to LineString) failed - expected: %f, got: %f", offset, dToL)
 	}
 
-	linearRing := NewLinearRing(NewPoint(p.Lat()-offset, p.Lon()+offset, 0), NewPoint(p.Lat()+offset, p.Lon()+offset, 0))
+	linearRing := NewLinearRing(p3, p4)
 	polygon := NewPolygon(linearRing)
 	if dToP := p.Distance(polygon); dToP != offset {
 		t.Errorf("Point Distance (to Polygon) failed - expected: %f, got: %f", offset, dToP)
 	}
 
-	multiPoint := NewMultiPoint(NewPoint(p.Lat()+offset, p.Lon(), 0), NewPoint(p.Lat()+offset, p.Lon()+offset, 0))
+	multiPoint := NewMultiPoint(p3, p4)
 	if dToMP := p.Distance(multiPoint); dToMP != offset {
 		t.Errorf("Point Distance (to MultiPoint) failed - expected: %f, got: %f", offset, dToMP)
 	}
