@@ -73,15 +73,26 @@ func TestPoint_Distance(t *testing.T) {
 		t.Errorf("Point Distance (to LineString) failed - expected: %f, got: %f", offset, dToL)
 	}
 
-	// TODO: implement polygon test
+	linearRing := NewLinearRing(NewPoint(p.Lat()-offset, p.Lon()+offset, 0), NewPoint(p.Lat()+offset, p.Lon()+offset, 0))
+	polygon := NewPolygon(linearRing)
+	if dToP := p.Distance(polygon); dToP != offset {
+		t.Errorf("Point Distance (to Polygon) failed - expected: %f, got: %f", offset, dToP)
+	}
 
 	multiPoint := NewMultiPoint(NewPoint(p.Lat()+offset, p.Lon(), 0), NewPoint(p.Lat()+offset, p.Lon()+offset, 0))
 	if dToMP := p.Distance(multiPoint); dToMP != offset {
 		t.Errorf("Point Distance (to MultiPoint) failed - expected: %f, got: %f", offset, dToMP)
 	}
 
-	// TODO: implement multilinestring test
-	// TODO: implement multipolygon test
+	multiLineString := NewMultiLineString(lineString)
+	if dToMLS := p.Distance(multiLineString); dToMLS != offset {
+		t.Errorf("Point Distance (to MultiLineString) failed - expected: %f, got: %f", offset, dToMLS)
+	}
+
+	multiPolygon := NewMultiPolygon(polygon)
+	if dToMPG := p.Distance(multiPolygon); dToMPG != offset {
+		t.Errorf("Point Distance (to MultiPolygon) failed - expected: %f, got: %f", offset, dToMPG)
+	}
 }
 
 // TODO: test buffer
