@@ -114,11 +114,11 @@ func (m MultiPolygon) Difference(another Geometry) Geometry {
 
 /* GEOMETRYCOLLECTION */
 func (m MultiPolygon) NumGeometries() int {
-	panic("implement me")
+	return len(m)
 }
 
 func (m MultiPolygon) GeometryN(n int) Geometry {
-	panic("implement me")
+	return m[n]
 }
 
 /* MULTISURFACE */
