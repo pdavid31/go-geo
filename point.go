@@ -166,7 +166,18 @@ func (p Point) Distance(another Geometry) float64 {
 
 		return math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
 	case Curve:
-		ls := another.(LineString)
+		var ls LineString
+
+		switch another.(type) {
+		case Line:
+			l := another.(Line)
+			ls = l.LineString
+		case LinearRing:
+			lr := another.(LinearRing)
+			ls = lr.LineString
+		default:
+			ls = another.(LineString)
+		}
 
 		minDist := math.MaxFloat64
 
