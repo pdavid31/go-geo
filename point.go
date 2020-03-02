@@ -132,7 +132,23 @@ func (p Point) Disjoint(another Geometry) bool {
 }
 
 func (p Point) Intersects(another Geometry) bool {
-	panic("implement me")
+	switch another.(type) {
+	case Point, Curve:
+		return p.Distance(another) == 0
+	case Polygon:
+		return p.Within(another)
+	case GeometryCollection:
+		geom := another.(GeometryCollection)
+
+		numGeoms := geom.NumGeometries()
+		for i := 0; i < numGeoms; i++ {
+			if p.Intersects(geom.GeometryN(i)) {
+				return true
+			}
+		}
+	}
+
+	return false
 }
 
 func (p Point) Touches(another Geometry) bool {
