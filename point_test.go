@@ -52,7 +52,11 @@ func TestPoint_Equals(t *testing.T) {
 	}
 }
 
-// TODO: test disjoint
+func TestPoint_Disjoint(t *testing.T) {
+	if p.Disjoint(p) || !p.Disjoint(p2) {
+		t.Error("Point Disjoint failed")
+	}
+}
 
 func TestPoint_Intersects(t *testing.T) {
 	if !p.Intersects(p) || p.Intersects(p2) {
