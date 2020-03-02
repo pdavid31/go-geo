@@ -160,7 +160,7 @@ func (p Point) Crosses(another Geometry) bool {
 }
 
 func (p Point) Within(another Geometry) bool {
-	panic("implement me")
+	return another.Contains(p)
 }
 
 func (p Point) Contains(another Geometry) bool {
