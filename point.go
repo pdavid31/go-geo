@@ -126,7 +126,7 @@ func (p Point) Equals(another Geometry) bool {
 }
 
 func (p Point) Disjoint(another Geometry) bool {
-	panic("implement me")
+	return !p.Intersects(another)
 }
 
 func (p Point) Intersects(another Geometry) bool {
