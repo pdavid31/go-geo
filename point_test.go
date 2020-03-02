@@ -77,7 +77,7 @@ func TestPoint_Distance(t *testing.T) {
 
 	multiPoint := NewMultiPoint(NewPoint(p.Lat()+offset, p.Lon(), 0), NewPoint(p.Lat()+offset, p.Lon()+offset, 0))
 	if dToMP := p.Distance(multiPoint); dToMP != offset {
-		t.Errorf("Point Distance (to LineString) failed - expected: %f, got: %f", offset, dToMP)
+		t.Errorf("Point Distance (to MultiPoint) failed - expected: %f, got: %f", offset, dToMP)
 	}
 
 	// TODO: implement multilinestring test
