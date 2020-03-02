@@ -70,6 +70,12 @@ func TestPoint_Intersects(t *testing.T) {
 	}
 }
 
+func BenchmarkPoint_Intersects(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		p.Intersects(p2)
+	}
+}
+
 // TODO: test touches
 // TODO: test crosses
 // TODO: test within
