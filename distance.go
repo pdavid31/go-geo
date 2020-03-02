@@ -1,15 +1,13 @@
-package internal
+package geo
 
 import (
 	"math"
-
-	"github.com/pdavid31/geo"
 )
 
 // see geos c++ library
 
 // see: geos::algorithm::Distance::pointToSegment
-func DistancePointToSegment(p, A, B geo.Point) float64 {
+func distancePointToSegment(p, A, B Point) float64 {
 	// if start == end, use pt distance
 	if A.Equals(B) {
 		return p.Distance(A)
