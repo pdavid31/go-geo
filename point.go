@@ -211,7 +211,7 @@ func (p Point) Distance(another Geometry) float64 {
 		minDist := math.MaxFloat64
 
 		numGeoms := gm.NumGeometries()
-		for i := 0; i < numGeoms-1; i++ {
+		for i := 0; i < numGeoms; i++ {
 			dist := p.Distance(gm.GeometryN(i))
 
 			if dist < minDist {
