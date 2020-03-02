@@ -53,7 +53,13 @@ func TestPoint_Equals(t *testing.T) {
 }
 
 // TODO: test disjoint
-// TODO: test intersects
+
+func TestPoint_Intersects(t *testing.T) {
+	if !p.Intersects(p) || p.Intersects(p2) {
+		t.Error("Point Intersects failed")
+	}
+}
+
 // TODO: test touches
 // TODO: test crosses
 // TODO: test within
