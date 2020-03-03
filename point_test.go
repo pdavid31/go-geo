@@ -117,6 +117,51 @@ func TestPoint_Distance(t *testing.T) {
 	}
 }
 
+func BenchmarkPoint_DistancePoint(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		p.Distance(p2)
+	}
+}
+
+func BenchmarkPoint_DistanceCurve(b *testing.B) {
+	p3 := NewPoint(p.Lat(), p.Lon()+offset, 0)
+	p4 := NewPoint(p.Lat()+offset, p.Lon()+offset, 0)
+	linearRing := NewLinearRing(p3, p4)
+
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		p.Distance(linearRing)
+	}
+}
+
+func BenchmarkPoint_DistancePolygon(b *testing.B) {
+	p3 := NewPoint(p.Lat(), p.Lon()+offset, 0)
+	p4 := NewPoint(p.Lat()+offset, p.Lon()+offset, 0)
+	linearRing := NewLinearRing(p3, p4)
+	polygon := NewPolygon(linearRing)
+
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		p.Distance(polygon)
+	}
+}
+
+func BenchmarkPoint_DistanceGeometryCollection(b *testing.B) {
+	p3 := NewPoint(p.Lat(), p.Lon()+offset, 0)
+	p4 := NewPoint(p.Lat()+offset, p.Lon()+offset, 0)
+	linearRing := NewLinearRing(p3, p4)
+	polygon := NewPolygon(linearRing)
+	multiPolygon := NewMultiPolygon(polygon)
+
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		p.Distance(multiPolygon)
+	}
+}
+
 // TODO: test buffer
 // TODO: test convexhull
 // TODO: test intersection
