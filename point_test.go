@@ -2,6 +2,7 @@ package geo
 
 import (
 	"fmt"
+	"math"
 	"testing"
 )
 
@@ -162,7 +163,19 @@ func BenchmarkPoint_DistanceGeometryCollection(b *testing.B) {
 	}
 }
 
-// TODO: test buffer
+func TestPoint_Buffer(t *testing.T) {
+	distance := 10.0
+	buffer := p.Buffer(distance)
+
+	for _, lr := range buffer.(Polygon) {
+		for _, bufferPoint := range lr.LineString {
+			if math.Round(p.Distance(bufferPoint)) != distance {
+				t.Error("Point Buffer failed")
+			}
+		}
+	}
+}
+
 // TODO: test convexhull
 // TODO: test intersection
 // TODO: test union
