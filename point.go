@@ -143,9 +143,11 @@ func (p Point) Intersects(another Geometry) bool {
 				return true
 			}
 		}
-	}
 
-	return false
+		return false
+	default:
+		return false
+	}
 }
 
 func (p Point) Touches(another Geometry) bool {
