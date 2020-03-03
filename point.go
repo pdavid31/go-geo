@@ -210,6 +210,8 @@ func (p Point) Distance(another Geometry) float64 {
 	case Polygon:
 		pg := another.(Polygon)
 
+		// TODO: return 0 if point within polygon?
+
 		minDist := math.MaxFloat64
 
 		for _, lr := range pg {
