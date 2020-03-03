@@ -242,7 +242,22 @@ func (p Point) Distance(another Geometry) float64 {
 }
 
 func (p Point) Buffer(distance float64) Geometry {
-	panic("implement me")
+	var points []Point
+	angle := 20
+
+	lat := p.Lat()
+	lon := p.Lon()
+	z := p.Z()
+
+	for i := 0; i < 360; i += angle {
+		rad := degToRad(float64(i))
+		x := lat + distance*math.Cos(rad)
+		y := lon + distance*math.Sin(rad)
+
+		points = append(points, NewPoint(x, y, z))
+	}
+
+	return NewPolygon(NewLinearRing(points...))
 }
 
 func (p Point) ConvexHull() Geometry {
