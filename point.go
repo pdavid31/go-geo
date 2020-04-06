@@ -1,7 +1,6 @@
 package geo
 
 import (
-	"fmt"
 	"math"
 	"strings"
 )
@@ -87,21 +86,7 @@ func (p Point) AsText() string {
 		rep += " "
 	}
 
-	x := fmt.Sprintf("%f", p.x)
-	y := fmt.Sprintf("%f", p.y)
-	rep += "(" + x + " " + y
-
-	if p.Is3D() {
-		z := fmt.Sprintf("%f", p.z)
-		rep += " " + z
-	}
-
-	if p.m != NullValue {
-		m := fmt.Sprintf("%f", p.m)
-		rep += " " + m
-	}
-
-	rep += ")"
+	rep += pointToString(p)
 
 	return rep
 }
