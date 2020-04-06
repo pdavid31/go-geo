@@ -1,6 +1,7 @@
 package geo
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -15,6 +16,12 @@ func TestMultiPolygon_GeometryType(t *testing.T) {
 func TestMultiPolygon_SRID(t *testing.T) {
 	if mpoly.SRID() != 4326 {
 		t.Error("MultiPolygon SRID failed")
+	}
+}
+
+func TestMultiPolygon_AsText(t *testing.T) {
+	if mpoly.AsText() != fmt.Sprintf("MULTIPOLYGON (((%f %f %f, %f %f %f, %f %f %f)))", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z(), p.Lat(), p.Lon(), p.Z()) {
+		t.Error("MultiPoint AsText failed")
 	}
 }
 

@@ -1,5 +1,9 @@
 package geo
 
+import (
+	"strings"
+)
+
 type MultiPolygon []Polygon
 
 /* CONSTRUCTOR */
@@ -39,7 +43,27 @@ func (m MultiPolygon) Envelope() Geometry {
 }
 
 func (m MultiPolygon) AsText() string {
-	panic("implement me")
+	rep := strings.ToUpper(m.GeometryType()) + " "
+
+	rep += m.ToString()
+
+	return rep
+}
+
+func (m MultiPolygon) ToString() string {
+	rep := "("
+
+	lastIndex := len(m) - 2
+	for i, p := range m {
+		rep += p.ToString()
+
+		if i <= lastIndex {
+			rep += ", "
+		}
+	}
+
+	rep += ")"
+	return rep
 }
 
 func (m MultiPolygon) IsEmpty() bool {
