@@ -87,7 +87,11 @@ func (p Point) AsText() string {
 		rep += " "
 	}
 
+	rep += "("
+
 	rep += p.ToString()
+
+	rep += ")"
 
 	return rep
 }
@@ -96,7 +100,7 @@ func (p Point) ToString() string {
 	x := fmt.Sprintf("%f", p.x)
 	y := fmt.Sprintf("%f", p.y)
 
-	rep := "(" + x + " " + y
+	rep := x + " " + y
 
 	if p.Is3D() {
 		z := fmt.Sprintf("%f", p.z)
@@ -107,8 +111,6 @@ func (p Point) ToString() string {
 		m := fmt.Sprintf("%f", p.m)
 		rep += " " + m
 	}
-
-	rep += ")"
 
 	return rep
 }
