@@ -15,6 +15,8 @@ type Geometry interface {
 	Envelope() Geometry
 	// AsText exports this geometric object to a specific Well-known Text Representation
 	AsText() string
+	// ToString returns WKT representation without prefix
+	ToString() string
 	// IsEmpty returns true if the geometric object is an empty Geometry
 	IsEmpty() bool
 	// Is3D returns true if the geometric object has a z coordinate
