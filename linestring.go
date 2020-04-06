@@ -286,7 +286,7 @@ func (l LineString) IsClosed() bool {
 	start := l.StartPoint()
 	end := l.EndPoint()
 
-	return reflect.DeepEqual(start, end)
+	return start.Equals(end)
 }
 
 /* LINESTRING */
