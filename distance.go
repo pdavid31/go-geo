@@ -4,6 +4,22 @@ import (
 	"math"
 )
 
+func MinMax(a []float64) (float64, float64) {
+	max := a[0]
+	min := a[0]
+
+	for _, v := range a {
+		if max < v {
+			max = v
+		}
+		if min > v {
+			min = v
+		}
+	}
+
+	return min, max
+}
+
 // see geos c++ library
 
 // see: geos::algorithm::Distance::pointToSegment
@@ -51,4 +67,68 @@ func distancePointToSegment(p, A, B Point) float64 {
 	s := ((A.Lon()-p.Lon())*(B.Lat()-A.Lat()) - (A.Lat()-p.Lat())*(B.Lon()-A.Lon())) / ((B.Lat()-A.Lat())*(B.Lat()-A.Lat()) + (B.Lon()-A.Lon())*(B.Lon()-A.Lon()))
 
 	return math.Abs(s) * math.Sqrt((B.Lat()-A.Lat())*(B.Lat()-A.Lat())+(B.Lon()-A.Lon())*(B.Lon()-A.Lon()))
+}
+
+// see: geos::algorithm::Distance::segmentToSegment
+func distanceSegmentToSegment(A, B, C, D Point) float64 {
+	// Check for zero-length segments
+	if A.Equals(B) {
+		return distancePointToSegment(A, C, D)
+	}
+	if C.Equals(D) {
+		return distancePointToSegment(D, A, B)
+	}
+
+	/* AB and CD are line segments */
+	/*
+	   From comp.graphics.algo
+	   Solving the above for r and s yields
+	       (Ay-Cy)(Dx-Cx)-(Ax-Cx)(Dy-Cy)
+	   r = ----------------------------- (eqn 1)
+	       (Bx-Ax)(Dy-Cy)-(By-Ay)(Dx-Cx)
+	       (Ay-Cy)(Bx-Ax)-(Ax-Cx)(By-Ay)
+	   s = ----------------------------- (eqn 2)
+	       (Bx-Ax)(Dy-Cy)-(By-Ay)(Dx-Cx)
+	   Let P be the position vector of the intersection point, then
+	       P=A+r(B-A) or
+	       Px=Ax+r(Bx-Ax)
+	       Py=Ay+r(By-Ay)
+	   By examining the values of r & s, you can also determine some other
+	   limiting conditions:
+	   If 0<=r<=1 & 0<=s<=1, intersection exists;
+	   If r<0 or r>1 or s<0 or s>1, line segments do not intersect;
+	   If the denominator in eqn 1 is zero, AB & CD are parallel;
+	   If the numerator in eqn 1 is also zero, AB & CD are collinear.
+	*/
+
+	noIntersection := false
+
+	denom := (B.Lat()-A.Lat())*(D.Lon()-C.Lon()) - (B.Lon()-A.Lon())*(D.Lat()-C.Lat())
+
+	if denom == 0 {
+		noIntersection = true
+	} else {
+		r_num := (A.Lon()-C.Lon())*(D.Lat()-C.Lat()) - (A.Lat()-C.Lat())*(D.Lon()-C.Lon())
+		s_num := (A.Lon()-C.Lon())*(B.Lat()-A.Lat()) - (A.Lat()-C.Lat())*(B.Lon()-A.Lon())
+
+		s := s_num / denom
+		r := r_num / denom
+
+		if r < 0 || r > 1 || s < 0 || s > 1 {
+			noIntersection = true
+		}
+	}
+
+	if noIntersection {
+		min, _ := MinMax([]float64{
+			distancePointToSegment(A, C, D),
+			distancePointToSegment(B, C, D),
+			distancePointToSegment(C, A, B),
+			distancePointToSegment(D, A, B),
+		})
+
+		return min
+	}
+
+	return 0.0
 }
