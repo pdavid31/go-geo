@@ -40,7 +40,7 @@ func TestLineString_SRID(t *testing.T) {
 }
 
 func TestLineString_AsText(t *testing.T) {
-	if ls.AsText() != fmt.Sprintf("LINESTRING (%f %f %f, %f %f %f)", p.x, p.y, p.z, p2.x, p2.y, p2.z) {
+	if ls.AsText() != fmt.Sprintf("LINESTRING (%f %f %f, %f %f %f)", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z()) {
 		t.Error("LineString AsText failed")
 	}
 }

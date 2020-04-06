@@ -21,7 +21,7 @@ func TestMultiPoint_SRID(t *testing.T) {
 }
 
 func TestMultiPoint_AsText(t *testing.T) {
-	if mp.AsText() != fmt.Sprintf("MULTIPOINT (%f %f %f, %f %f %f)", p.x, p.y, p.z, p2.x, p2.y, p2.z) {
+	if mp.AsText() != fmt.Sprintf("MULTIPOINT (%f %f %f, %f %f %f)", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z()) {
 		t.Error("MultiPoint AsText failed")
 	}
 }
