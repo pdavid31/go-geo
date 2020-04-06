@@ -1,5 +1,9 @@
 package geo
 
+import (
+	"strings"
+)
+
 type MultiLineString []LineString
 
 /* CONSTRUCTOR */
@@ -39,7 +43,27 @@ func (m MultiLineString) Envelope() Geometry {
 }
 
 func (m MultiLineString) AsText() string {
-	panic("implement me")
+	rep := strings.ToUpper(m.GeometryType()) + " "
+
+	rep += m.ToString()
+
+	return rep
+}
+
+func (m MultiLineString) ToString() string {
+	rep := "("
+
+	lastIndex := len(m) - 2
+	for i, ls := range m {
+		rep += ls.ToString()
+
+		if i <= lastIndex {
+			rep += ", "
+		}
+	}
+
+	rep += ")"
+	return rep
 }
 
 func (m MultiLineString) IsEmpty() bool {

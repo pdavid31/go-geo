@@ -1,6 +1,7 @@
 package geo
 
 import (
+	"fmt"
 	"math"
 	"testing"
 )
@@ -16,6 +17,12 @@ func TestMultiLineString_GeometryType(t *testing.T) {
 func TestMultiLineString_SRID(t *testing.T) {
 	if mls.SRID() != 4326 {
 		t.Error("MultiLineString SRID failed")
+	}
+}
+
+func TestMultiLineString_AsText(t *testing.T) {
+	if mls.AsText() != fmt.Sprintf("MULTILINESTRING ((%f %f %f, %f %f %f))", p.x, p.y, p.z, p2.x, p2.y, p2.z) {
+		t.Error("MultiPoint AsText failed")
 	}
 }
 
