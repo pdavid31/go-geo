@@ -132,6 +132,8 @@ func (l LineString) Equals(another Geometry) bool {
 	// check if given geometry is a point
 	switch another.(type) {
 	case LineString, Line, LinearRing:
+		// TODO: get rid of reflect
+		// TODO: add independence of order
 		return reflect.DeepEqual(l, another)
 	default:
 		return false
