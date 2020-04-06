@@ -167,14 +167,73 @@ func (l LineString) Overlaps(another Geometry) bool {
 }
 
 func (l LineString) Distance(another Geometry) float64 {
-	// TODO: Switch to shortest distance between two lines instead of centroids
-	// See: https://stackoverflow.com/questions/38514607/find-shortest-path-from-one-line-to-other-in-shapely/38997756#38997756
-	diffX := another.Lat() - l.Lat()
-	diffY := another.Lon() - l.Lon()
-	diffZ := another.Z() - l.Z()
+	switch another.(type) {
+	case Point:
+		p := another.(Point)
 
-	distance := math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
-	return distance
+		return p.Distance(l)
+	case Curve:
+		var ls LineString
+
+		switch another.(type) {
+		case Line:
+			l := another.(Line)
+			ls = l.LineString
+		case LinearRing:
+			lr := another.(LinearRing)
+			ls = lr.LineString
+		default:
+			ls = another.(LineString)
+		}
+
+		minDist := math.MaxFloat64
+
+		numPoints := l.NumPoints()
+		numPoints2 := ls.NumPoints()
+
+		for i := 0; i < numPoints-1; i++ {
+			for j := 0; j < numPoints2-1; j++ {
+				dist := distanceSegmentToSegment(l.PointN(i), l.PointN(i+1), ls.PointN(i), ls.PointN(i+1))
+
+				if dist < minDist {
+					minDist = dist
+				}
+			}
+		}
+
+		return minDist
+	case Polygon:
+		pg := another.(Polygon)
+
+		minDist := math.MaxFloat64
+
+		for _, lr := range pg {
+			dist := l.Distance(lr)
+
+			if dist < minDist {
+				minDist = dist
+			}
+		}
+
+		return minDist
+	case GeometryCollection:
+		gm := another.(GeometryCollection)
+
+		minDist := math.MaxFloat64
+
+		numGeoms := gm.NumGeometries()
+		for i := 0; i < numGeoms; i++ {
+			dist := l.Distance(gm.GeometryN(i))
+
+			if dist < minDist {
+				minDist = dist
+			}
+		}
+
+		return minDist
+	default:
+		return 0
+	}
 }
 
 func (l LineString) Buffer(distance float64) Geometry {

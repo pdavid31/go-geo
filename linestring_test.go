@@ -72,13 +72,37 @@ func TestLineString_Equals(t *testing.T) {
 }
 
 func TestLineString_Distance(t *testing.T) {
-	p3 := NewPoint(2, 1, 1)
-	p4 := NewPoint(3, 0, 0)
+	p3 := NewPoint(p.Lat()-offset, p.Lon(), 0)
+	p4 := NewPoint(p.Lat()-offset, p.Lon()+offset, 0)
 
-	ls2 := NewLineString(p3, p4)
+	if dToP := ls.Distance(p3); dToP != offset {
+		t.Errorf("LineString Distance (to Point) failed - expected: %f, got: %f", offset, dToP)
+	}
 
-	if ls.Distance(ls2) != 2.0 {
-		t.Error("LineString Distance failed")
+	lineString := NewLineString(p3, p4)
+	if dToL := l.Distance(lineString); dToL != offset {
+		t.Errorf("LineString Distance (to LineString) failed - expected: %f, got: %f", offset, dToL)
+	}
+
+	linearRing := NewLinearRing(p3, p4)
+	polygon := NewPolygon(linearRing)
+	if dToP := p.Distance(polygon); dToP != offset {
+		t.Errorf("LineString Distance (to Polygon) failed - expected: %f, got: %f", offset, dToP)
+	}
+
+	multiPoint := NewMultiPoint(p3, p4)
+	if dToMP := p.Distance(multiPoint); dToMP != offset {
+		t.Errorf("LineString Distance (to MultiPoint) failed - expected: %f, got: %f", offset, dToMP)
+	}
+
+	multiLineString := NewMultiLineString(lineString)
+	if dToMLS := p.Distance(multiLineString); dToMLS != offset {
+		t.Errorf("LineString Distance (to MultiLineString) failed - expected: %f, got: %f", offset, dToMLS)
+	}
+
+	multiPolygon := NewMultiPolygon(polygon)
+	if dToMPG := p.Distance(multiPolygon); dToMPG != offset {
+		t.Errorf("LineString Distance (to MultiPolygon) failed - expected: %f, got: %f", offset, dToMPG)
 	}
 }
 
