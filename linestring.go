@@ -1,7 +1,6 @@
 package geo
 
 import (
-	"fmt"
 	"math"
 	"reflect"
 	"strings"
@@ -92,19 +91,19 @@ func (l LineString) Envelope() Geometry {
 }
 
 func (l LineString) AsText() string {
-	is3D := l.Is3D()
+	rep := strings.ToUpper(l.GeometryType()) + " "
+
+	rep += l.ToString()
+
+	return rep
+}
+
+func (l LineString) ToString() string {
+	rep := "("
+
 	lastIndex := len(l) - 2
-	rep := strings.ToUpper(l.GeometryType()) + " ("
 	for i, p := range l {
-		x := fmt.Sprintf("%f", p.x)
-		y := fmt.Sprintf("%f", p.y)
-
-		rep += x + " " + y
-
-		if is3D {
-			z := fmt.Sprintf("%f", p.z)
-			rep += " " + z
-		}
+		rep += p.ToString()
 
 		if i <= lastIndex {
 			rep += ", "
