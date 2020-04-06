@@ -1,7 +1,6 @@
 package geo
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -44,19 +43,19 @@ func (m MultiPoint) Envelope() Geometry {
 }
 
 func (m MultiPoint) AsText() string {
-	is3D := m.Is3D()
+	rep := strings.ToUpper(m.GeometryType()) + " "
+
+	rep += m.ToString()
+
+	return rep
+}
+
+func (m MultiPoint) ToString() string {
+	rep := "("
+
 	lastIndex := len(m) - 2
-	rep := strings.ToUpper(m.GeometryType()) + " ("
 	for i, p := range m {
-		x := fmt.Sprintf("%f", p.x)
-		y := fmt.Sprintf("%f", p.y)
-
-		rep += x + " " + y
-
-		if is3D {
-			z := fmt.Sprintf("%f", p.z)
-			rep += " " + z
-		}
+		rep += p.ToString()
 
 		if i <= lastIndex {
 			rep += ", "
