@@ -250,7 +250,7 @@ func (p Point) Distance(another Geometry) float64 {
 
 func (p Point) Buffer(distance float64) Geometry {
 	var points []Point
-	angle := 20
+	angle := 10
 
 	lat := p.Lat()
 	lon := p.Lon()
