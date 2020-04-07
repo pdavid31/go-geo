@@ -6,10 +6,6 @@ import (
 	"strings"
 )
 
-const (
-	NullValue = -999999.9
-)
-
 type Point struct {
 	x float64
 	y float64

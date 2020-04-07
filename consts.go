@@ -1,6 +1,10 @@
 package geo
 
+import "math"
+
 const (
+	NullValue float64 = -math.MaxFloat64
+
 	lat float64 = 0
 	lon float64 = 0
 	z   float64 = 0
