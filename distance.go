@@ -4,6 +4,7 @@ import (
 	"math"
 )
 
+// MinMax searches for minimum an maximum value in a float64 slice
 func MinMax(a []float64) (float64, float64) {
 	max := a[0]
 	min := a[0]
@@ -108,11 +109,11 @@ func distanceSegmentToSegment(A, B, C, D Point) float64 {
 	if denom == 0 {
 		noIntersection = true
 	} else {
-		r_num := (A.Lon()-C.Lon())*(D.Lat()-C.Lat()) - (A.Lat()-C.Lat())*(D.Lon()-C.Lon())
-		s_num := (A.Lon()-C.Lon())*(B.Lat()-A.Lat()) - (A.Lat()-C.Lat())*(B.Lon()-A.Lon())
+		rNum := (A.Lon()-C.Lon())*(D.Lat()-C.Lat()) - (A.Lat()-C.Lat())*(D.Lon()-C.Lon())
+		sNum := (A.Lon()-C.Lon())*(B.Lat()-A.Lat()) - (A.Lat()-C.Lat())*(B.Lon()-A.Lon())
 
-		s := s_num / denom
-		r := r_num / denom
+		s := sNum / denom
+		r := rNum / denom
 
 		if r < 0 || r > 1 || s < 0 || s > 1 {
 			noIntersection = true

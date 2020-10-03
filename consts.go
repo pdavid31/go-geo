@@ -3,6 +3,7 @@ package geo
 import "math"
 
 const (
+	// NullValue is the float64 value describing not set coordinates
 	NullValue float64 = -math.MaxFloat64
 
 	lat float64 = 0

@@ -1,5 +1,6 @@
 package geo
 
+// Geometry interface describes functions on the Geometry object type
 type Geometry interface {
 	// TODO: add complete simple feature model
 	Lat() float64

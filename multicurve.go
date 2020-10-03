@@ -1,5 +1,6 @@
 package geo
 
+// MultiCurve interface describes functions on the MultiCurve object type
 type MultiCurve interface {
 	// Returns the Length of this MultiCurve which is equal to the sum of the lengths of the element Curves
 	Length() float64

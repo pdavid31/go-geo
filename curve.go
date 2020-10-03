@@ -1,5 +1,6 @@
 package geo
 
+// Curve interface describes functions for the Curve object type
 type Curve interface {
 	// Returns the length of this Curve in its associated spatial reference
 	Length() float64
