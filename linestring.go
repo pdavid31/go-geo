@@ -9,6 +9,7 @@ import (
 type LineString []Point
 
 /* CONSTRUCTOR */
+// NewLineString LineString constructor
 func NewLineString(points ...Point) LineString {
 	var ls LineString
 

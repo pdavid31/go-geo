@@ -14,6 +14,7 @@ type Point struct {
 }
 
 /* CONSTRUCTOR */
+// NewPoint Point constructor
 func NewPoint(params ...float64) Point {
 	var p Point
 

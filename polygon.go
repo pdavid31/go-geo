@@ -8,6 +8,7 @@ import (
 type Polygon []LinearRing
 
 /* CONSTRUCTOR */
+// NewPolygon Polygon constructor
 func NewPolygon(linearrings ...LinearRing) Polygon {
 	var poly Polygon
 

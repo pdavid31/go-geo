@@ -7,6 +7,7 @@ import (
 type MultiLineString []LineString
 
 /* CONSTRUCTOR */
+// NewMultiLineString MultiLineString constructor
 func NewMultiLineString(linestrings ...LineString) MultiLineString {
 	var mls MultiLineString
 

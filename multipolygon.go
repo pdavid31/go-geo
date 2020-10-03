@@ -7,6 +7,7 @@ import (
 type MultiPolygon []Polygon
 
 /* CONSTRUCTOR */
+// NewMultiPolygon MultiPolygon constructor
 func NewMultiPolygon(polygons ...Polygon) MultiPolygon {
 	var mpoly MultiPolygon
 

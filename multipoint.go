@@ -7,6 +7,7 @@ import (
 type MultiPoint []Point
 
 /* CONSTRUCTOR */
+// NewMultiPoint MultiPoint constructor
 func NewMultiPoint(points ...Point) MultiPoint {
 	var mp MultiPoint
 

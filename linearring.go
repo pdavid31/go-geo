@@ -5,6 +5,7 @@ type LinearRing struct {
 }
 
 /* CONSTRUCTOR */
+// NewLinearRing LinearRing constructor
 func NewLinearRing(points ...Point) LinearRing {
 	var lr LinearRing
 

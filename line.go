@@ -5,6 +5,7 @@ type Line struct {
 }
 
 /* CONSTRUCTOR */
+// NewLine Line constructor
 func NewLine(p1, p2 Point) Line {
 	var l Line
 
