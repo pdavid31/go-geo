@@ -157,3 +157,10 @@ func (m MultiPolygon) Centroid() Point {
 func (m MultiPolygon) PointOnSurface() Point {
 	panic("implement me")
 }
+
+/* INTERFACE GUARD */
+var (
+	_ Geometry           = (*MultiPolygon)(nil)
+	_ GeometryCollection = (*MultiPolygon)(nil)
+	_ MultiSurface       = (*MultiPolygon)(nil)
+)
