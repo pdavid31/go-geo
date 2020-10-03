@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// Point type
 type Point struct {
 	x float64
 	y float64
@@ -14,6 +15,7 @@ type Point struct {
 }
 
 /* CONSTRUCTOR */
+
 // NewPoint Point constructor
 func NewPoint(params ...float64) Point {
 	var p Point
@@ -42,31 +44,39 @@ func NewPoint(params ...float64) Point {
 }
 
 /* GEOMETRY */
+
+// Lat function returns the latitude of the Geometry
 func (p Point) Lat() float64 {
 	return p.x
 }
 
+// Lon function returns the longitude of the Geometry
 func (p Point) Lon() float64 {
 	return p.y
 }
 
+// Z function returns the altitude of the Geometry
 func (p Point) Z() float64 {
 	return p.z
 }
 
+// GeometryType returns GeometryType as a string
 func (p Point) GeometryType() string {
 	return "Point"
 }
 
+// SRID returns the SRID as an integer
 func (p Point) SRID() int {
 	return 4326
 }
 
+// Envelope returns the Envelope of the geometry
 func (p Point) Envelope() Geometry {
 	// TODO: implement
 	return nil
 }
 
+// AsText returns the string representation of the geometry
 func (p Point) AsText() string {
 	// example POINT ZM (1 1 5 60)
 	rep := strings.ToUpper(p.GeometryType()) + " "
@@ -93,6 +103,7 @@ func (p Point) AsText() string {
 	return rep
 }
 
+// ToString returns the internal string representation of the geometry
 func (p Point) ToString() string {
 	x := fmt.Sprintf("%f", p.x)
 	y := fmt.Sprintf("%f", p.y)
@@ -112,14 +123,17 @@ func (p Point) ToString() string {
 	return rep
 }
 
+// IsEmpty returns a bool indicating if the geometry is empty
 func (p Point) IsEmpty() bool {
 	return p.x == NullValue || p.y == NullValue
 }
 
+// Is3D returns a bool indicating if the geometry is three dimensional
 func (p Point) Is3D() bool {
 	return p.z != NullValue
 }
 
+// Equals returns true if the geometry is equal to a given other
 func (p Point) Equals(another Geometry) bool {
 	// check if given geometry is a point
 	switch another.(type) {
@@ -130,10 +144,12 @@ func (p Point) Equals(another Geometry) bool {
 	}
 }
 
+// Disjoint returns true if the geometry is disjoint to a given other
 func (p Point) Disjoint(another Geometry) bool {
 	return !p.Intersects(another)
 }
 
+// Intersects returns true if the geometry intersects another given geometry
 func (p Point) Intersects(another Geometry) bool {
 	switch another.(type) {
 	case Point, Curve:
@@ -156,26 +172,32 @@ func (p Point) Intersects(another Geometry) bool {
 	}
 }
 
+// Touches returns true if the geometry touches another given geometry
 func (p Point) Touches(another Geometry) bool {
 	panic("implement me")
 }
 
+// Crosses returns true if the geometry crosses another given geometry
 func (p Point) Crosses(another Geometry) bool {
 	panic("implement me")
 }
 
+// Within returns true if the geometry is within another given geometry
 func (p Point) Within(another Geometry) bool {
 	return another.Contains(p)
 }
 
+// Contains returns true if the geometry contains another given geometry
 func (p Point) Contains(another Geometry) bool {
 	panic("implement me")
 }
 
+// Overlaps returns true if the geometry overlaps another given geometry
 func (p Point) Overlaps(another Geometry) bool {
 	panic("implement me")
 }
 
+// Distance calculates the distane to another given geometry
 func (p Point) Distance(another Geometry) float64 {
 	switch another.(type) {
 	case Point:
@@ -249,6 +271,7 @@ func (p Point) Distance(another Geometry) float64 {
 	}
 }
 
+// Buffer returns the Buffer with the given distance around the geometry
 func (p Point) Buffer(distance float64) Geometry {
 	var points []Point
 	angle := 10
@@ -268,18 +291,22 @@ func (p Point) Buffer(distance float64) Geometry {
 	return NewPolygon(NewLinearRing(points...))
 }
 
+// ConvexHull returns the ConvexHull containing the geometry
 func (p Point) ConvexHull() Geometry {
 	panic("implement me")
 }
 
+// Intersection returns the Intersection of the geometry and another given geometry
 func (p Point) Intersection(another Geometry) Geometry {
 	panic("implement me")
 }
 
+// Union returns the Union of the geometry and another given geometry
 func (p Point) Union(another Geometry) Geometry {
 	panic("implement me")
 }
 
+// Difference returns the Difference of the geometry and another given geometry
 func (p Point) Difference(another Geometry) Geometry {
 	panic("implement me")
 }

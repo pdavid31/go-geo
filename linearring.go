@@ -1,10 +1,12 @@
 package geo
 
+// LinearRing type
 type LinearRing struct {
 	LineString
 }
 
 /* CONSTRUCTOR */
+
 // NewLinearRing LinearRing constructor
 func NewLinearRing(points ...Point) LinearRing {
 	var lr LinearRing
@@ -23,6 +25,8 @@ func NewLinearRing(points ...Point) LinearRing {
 }
 
 /* GEOMETRY */
+
+// GeometryType returns GeometryType as a string
 func (l LinearRing) GeometryType() string {
 	return "LinearRing"
 }
