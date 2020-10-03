@@ -165,3 +165,10 @@ func (m MultiLineString) IsClosed() bool {
 
 	return true
 }
+
+/* INTERFACE GUARD */
+var (
+	_ Geometry           = (*MultiLineString)(nil)
+	_ GeometryCollection = (*MultiLineString)(nil)
+	_ MultiCurve         = (*MultiLineString)(nil)
+)

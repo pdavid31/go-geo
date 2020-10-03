@@ -144,3 +144,9 @@ func (m MultiPoint) NumGeometries() int {
 func (m MultiPoint) GeometryN(n int) Geometry {
 	return m[n]
 }
+
+/* INTERFACE GUARD */
+var (
+	_ Geometry           = (*MultiPoint)(nil)
+	_ GeometryCollection = (*MultiPoint)(nil)
+)

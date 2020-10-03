@@ -299,3 +299,9 @@ func (l LineString) NumPoints() int {
 func (l LineString) PointN(n int) Point {
 	return l[n]
 }
+
+/* INTERFACE GUARD */
+var (
+	_ Geometry = (*LineString)(nil)
+	_ Curve    = (*LineString)(nil)
+)

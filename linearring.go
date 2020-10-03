@@ -25,3 +25,9 @@ func NewLinearRing(points ...Point) LinearRing {
 func (l LinearRing) GeometryType() string {
 	return "LinearRing"
 }
+
+/* INTERFACE GUARD */
+var (
+	_ Geometry = (*LinearRing)(nil)
+	_ Curve    = (*LinearRing)(nil)
+)

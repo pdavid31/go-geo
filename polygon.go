@@ -172,3 +172,9 @@ func (p Polygon) NumInteriorRing() int {
 func (p Polygon) InteriorRingN(n int) LinearRing {
 	panic("implement me")
 }
+
+/* INTERFACE GUARD */
+var (
+	_ Geometry = (*Polygon)(nil)
+	_ Surface  = (*Polygon)(nil)
+)

@@ -282,3 +282,8 @@ func (p Point) Union(another Geometry) Geometry {
 func (p Point) Difference(another Geometry) Geometry {
 	panic("implement me")
 }
+
+/* INTERFACE GUARD */
+var (
+	_ Geometry = (*Point)(nil)
+)

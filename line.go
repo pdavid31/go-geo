@@ -17,3 +17,9 @@ func NewLine(p1, p2 Point) Line {
 func (l Line) GeometryType() string {
 	return "Line"
 }
+
+/* INTERFACE GUARD */
+var (
+	_ Geometry = (*Line)(nil)
+	_ Curve    = (*Line)(nil)
+)
