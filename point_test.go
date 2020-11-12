@@ -4,53 +4,39 @@ import (
 	"fmt"
 	"math"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestPoint_GeometryType(t *testing.T) {
-	if p.GeometryType() != "Point" {
-		t.Error("Point GeometryType failed")
-	}
+	assert.Equal(t, "Point", p.GeometryType(), "Point GeometryType failed")
 }
 
 func TestPoint_SRID(t *testing.T) {
-	if p.SRID() != 4326 {
-		t.Error("Point SRID failed")
-	}
+	assert.Equal(t, 4326, p.SRID(), "Point SRID failed")
 }
 
 // TODO: test envelope
 
 func TestPoint_AsText(t *testing.T) {
-	if p.AsText() != fmt.Sprintf("POINT Z (%f %f %f)", p.Lat(), p.Lon(), p.Z()) {
-		t.Error("Point AsText failed")
-	}
+	asText := fmt.Sprintf("POINT Z (%f %f %f)", p.Lat(), p.Lon(), p.Z())
+	assert.Equal(t, asText, p.AsText())
 }
 
 func TestPoint_IsEmpty(t *testing.T) {
-	if p.IsEmpty() {
-		t.Error("Point IsEmpty failed")
-	}
+	assert.False(t, p.IsEmpty(), "Point IsEmpty failed")
 
 	p3 := NewPoint()
-	if !p3.IsEmpty() {
-		t.Error("Point IsEmpty failed")
-	}
+	assert.True(t, p3.IsEmpty(), "Point IsEmpty failed")
 }
 
 func TestPoint_Is3D(t *testing.T) {
-	if !p.Is3D() {
-		t.Error("Point Is3D failed")
-	}
+	assert.True(t, p.Is3D(), "Point Is3D failed")
 }
 
 func TestPoint_Equals(t *testing.T) {
-	if !p.Equals(p) {
-		t.Error("Point Equals failed")
-	}
-
-	if p.Equals(p2) {
-		t.Error("Point Equals failed")
-	}
+	assert.True(t, p.Equals(p), "Point Equals failed")
+	assert.False(t, p.Equals(p2), "Point Equals failed")
 }
 
 func BenchmarkPoint_Equals(b *testing.B) {
@@ -66,9 +52,7 @@ func TestPoint_Disjoint(t *testing.T) {
 }
 
 func TestPoint_Intersects(t *testing.T) {
-	if !p.Intersects(p) || p.Intersects(p2) {
-		t.Error("Point Intersects failed")
-	}
+	assert.False(t, !p.Intersects(p) || p.Intersects(p2), "Point Intersects failed")
 }
 
 func BenchmarkPoint_Intersects(b *testing.B) {
@@ -87,35 +71,29 @@ func TestPoint_Distance(t *testing.T) {
 	p3 := NewPoint(p.Lat(), p.Lon()+offset, 0)
 	p4 := NewPoint(p.Lat()+offset, p.Lon()+offset, 0)
 
-	if dToP := p.Distance(p3); dToP != offset {
-		t.Errorf("Point Distance (to Point) failed - expected: %f, got: %f", offset, dToP)
-	}
+	dToP := p.Distance(p3)
+	assert.Equal(t, offset, dToP, "Point Distance (to Point) failed - expected: %f, got: %f", offset, dToP)
 
 	lineString := NewLineString(p3, p4)
-	if dToL := p.Distance(lineString); dToL != offset {
-		t.Errorf("Point Distance (to LineString) failed - expected: %f, got: %f", offset, dToL)
-	}
+	dToL := p.Distance(lineString)
+	assert.Equal(t, offset, dToL, "Point Distance (to LineString) failed - expected: %f, got: %f", offset, dToL)
 
 	linearRing := NewLinearRing(p3, p4)
 	polygon := NewPolygon(linearRing)
-	if dToP := p.Distance(polygon); dToP != offset {
-		t.Errorf("Point Distance (to Polygon) failed - expected: %f, got: %f", offset, dToP)
-	}
+	dToP = p.Distance(polygon)
+	assert.Equal(t, offset, dToP, "Point Distance (to Polygon) failed - expected: %f, got: %f", offset, dToP)
 
 	multiPoint := NewMultiPoint(p3, p4)
-	if dToMP := p.Distance(multiPoint); dToMP != offset {
-		t.Errorf("Point Distance (to MultiPoint) failed - expected: %f, got: %f", offset, dToMP)
-	}
+	dToMP := p.Distance(multiPoint)
+	assert.Equal(t, offset, dToMP, "Point Distance (to MultiPoint) failed - expected: %f, got: %f", offset, dToMP)
 
 	multiLineString := NewMultiLineString(lineString)
-	if dToMLS := p.Distance(multiLineString); dToMLS != offset {
-		t.Errorf("Point Distance (to MultiLineString) failed - expected: %f, got: %f", offset, dToMLS)
-	}
+	dToMLS := p.Distance(multiLineString)
+	assert.Equal(t, offset, dToMLS, "Point Distance (to MultiLineString) failed - expected: %f, got: %f", offset, dToMLS)
 
 	multiPolygon := NewMultiPolygon(polygon)
-	if dToMPG := p.Distance(multiPolygon); dToMPG != offset {
-		t.Errorf("Point Distance (to MultiPolygon) failed - expected: %f, got: %f", offset, dToMPG)
-	}
+	dToMPG := p.Distance(multiPolygon)
+	assert.Equal(t, offset, dToMPG)
 }
 
 func BenchmarkPoint_DistancePoint(b *testing.B) {
@@ -169,9 +147,7 @@ func TestPoint_Buffer(t *testing.T) {
 
 	for _, lr := range buffer.(Polygon) {
 		for _, bufferPoint := range lr.LineString {
-			if math.Round(p.Distance(bufferPoint)) != distance {
-				t.Error("Point Buffer failed")
-			}
+			assert.Equal(t, distance, math.Round(p.Distance(bufferPoint)))
 		}
 	}
 }

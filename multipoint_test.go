@@ -2,50 +2,38 @@ package geo
 
 import (
 	"fmt"
-	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var mp = NewMultiPoint(p, p2)
 
 func TestMultiPoint_GeometryType(t *testing.T) {
-	if mp.GeometryType() != "MultiPoint" {
-		t.Error("MultiPoint GeometryType failed")
-	}
+	assert.Equal(t, "MultiPoint", mp.GeometryType(), "MultiPoint GeometryType failed")
 }
 
 func TestMultiPoint_SRID(t *testing.T) {
-	if mp.SRID() != 4326 {
-		t.Error("MultiPoint SRID failed")
-	}
+	assert.Equal(t, 4326, mp.SRID(), "MultiPoint SRID failed")
 }
 
 func TestMultiPoint_AsText(t *testing.T) {
-	if mp.AsText() != fmt.Sprintf("MULTIPOINT (%f %f %f, %f %f %f)", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z()) {
-		t.Error("MultiPoint AsText failed")
-	}
+	asText := fmt.Sprintf("MULTIPOINT (%f %f %f, %f %f %f)", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z())
+	assert.Equal(t, asText, mp.AsText(), "MultiPoint AsText failed")
 }
 
 func TestMultiPoint_IsEmpty(t *testing.T) {
-	if mp.IsEmpty() {
-		t.Error("MultiPoint IsEmpty failed")
-	}
+	assert.False(t, mp.IsEmpty(), "MultiPoint IsEmpty failed")
 }
 
 func TestMultiPoint_Is3D(t *testing.T) {
-	if !mp.Is3D() {
-		t.Error("MultiPoint Is3D failed")
-	}
+	assert.True(t, mp.Is3D(), "MultiPoint Is3D failed")
 }
 
 func TestMultiPoint_NumGeometries(t *testing.T) {
-	if len(mp) != 2 {
-		t.Error("MultiPoint NumGeometries failex^d")
-	}
+	assert.Equal(t, 2, len(mp), "MultiPoint NumGeometries failed")
 }
 
 func TestMultiPoint_GeometryN(t *testing.T) {
-	if !reflect.DeepEqual(mp.GeometryN(0), p) {
-		t.Error("MultiPoint GeometryN failed")
-	}
+	assert.Equal(t, p, mp.GeometryN(0), "MultiPoint GeometryN failed")
 }
