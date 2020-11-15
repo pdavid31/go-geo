@@ -2,18 +2,16 @@ package geo
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var lr = NewLinearRing(p, p2)
 
 func TestLinearRing_GeometryType(t *testing.T) {
-	if lr.GeometryType() != "LinearRing" {
-		t.Error("LinearRing GeometryType failed")
-	}
+	assert.Equal(t, "LinearRing", lr.GeometryType(), "LinearRing GeometryType failed")
 }
 
 func TestLinearRing_IsClosed(t *testing.T) {
-	if !lr.IsClosed() {
-		t.Error("LinearRing IsClosed failed")
-	}
+	assert.True(t, lr.IsClosed(), "LinearRing IsClosed failed")
 }

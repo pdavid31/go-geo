@@ -4,44 +4,35 @@ import (
 	"fmt"
 	"math"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var mls = NewMultiLineString(ls)
 
 func TestMultiLineString_GeometryType(t *testing.T) {
-	if mls.GeometryType() != "MultiLineString" {
-		t.Error("MultiLineString GeometryType failed")
-	}
+	assert.Equal(t, "MultiLineString", mls.GeometryType(), "MultiLineString GeometryType failed")
 }
 
 func TestMultiLineString_SRID(t *testing.T) {
-	if mls.SRID() != 4326 {
-		t.Error("MultiLineString SRID failed")
-	}
+	assert.Equal(t, 4326, mls.SRID(), "MultiLineString SRID failed")
 }
 
 func TestMultiLineString_AsText(t *testing.T) {
-	if mls.AsText() != fmt.Sprintf("MULTILINESTRING ((%f %f %f, %f %f %f))", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z()) {
-		t.Error("MultiPoint AsText failed")
-	}
+	asText := fmt.Sprintf("MULTILINESTRING ((%f %f %f, %f %f %f))", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z())
+	assert.Equal(t, asText, mls.AsText())
 }
 
 func TestMultiLineString_IsEmpty(t *testing.T) {
-	if mls.IsEmpty() {
-		t.Error("MultiLineString IsEmpty failed")
-	}
+	assert.False(t, mls.IsEmpty(), "MultiLineString IsEmpty failed")
 }
 
 func TestMultiLineString_Is3D(t *testing.T) {
-	if !mls.Is3D() {
-		t.Error("MultiLineString Is3D failed")
-	}
+	assert.True(t, mls.Is3D(), "MultiLineString Is3D failed")
 }
 
 func TestMultiLineString_NumGeometries(t *testing.T) {
-	if mls.NumGeometries() != 1 {
-		t.Error("MultiLineString NumGeometries failed")
-	}
+	assert.Equal(t, 1, mls.NumGeometries(), "MultiLineString NumGeometries failed")
 }
 
 // TODO: compare Arrays of struct
@@ -56,13 +47,9 @@ func TestMultiLineString_NumGeometries(t *testing.T) {
 
 func TestMultiLineString_Length(t *testing.T) {
 	correctLength := math.Sqrt(offset * 3)
-	if mls.Length() != correctLength {
-		t.Error("MultiLineString Length failed")
-	}
+	assert.Equal(t, correctLength, mls.Length(), "MultiLineString Length failed")
 }
 
 func TestMultiLineString_IsClosed(t *testing.T) {
-	if mls.IsClosed() {
-		t.Error("MultiLineString IsClosed failed")
-	}
+	assert.False(t, mls.IsClosed(), "MultiLineString IsClosed failed")
 }
