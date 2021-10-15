@@ -55,8 +55,8 @@ func (p Point) Lon() float64 {
 	return p.y
 }
 
-// Z function returns the altitude of the Geometry
-func (p Point) Z() float64 {
+// Alt function returns the altitude of the Geometry
+func (p Point) Alt() float64 {
 	return p.z
 }
 
@@ -82,7 +82,7 @@ func (p Point) AsText() string {
 	rep := strings.ToUpper(p.GeometryType()) + " "
 
 	if p.Is3D() {
-		rep += "Z"
+		rep += "Alt"
 	}
 
 	if p.m != NullValue {
@@ -138,7 +138,7 @@ func (p Point) Equals(another Geometry) bool {
 	// check if given geometry is a point
 	switch another.(type) {
 	case Point:
-		return p.Lat() == another.Lat() && p.Lon() == another.Lon() && p.Z() == another.Z()
+		return p.Lat() == another.Lat() && p.Lon() == another.Lon() && p.Alt() == another.Alt()
 	default:
 		return false
 	}
@@ -206,7 +206,7 @@ func (p Point) Distance(another Geometry) float64 {
 		// euclidean distance
 		diffX := p2.Lat() - p.Lat()
 		diffY := p2.Lon() - p.Lon()
-		diffZ := p2.Z() - p.Z()
+		diffZ := p2.Alt() - p.Alt()
 
 		return math.Sqrt(math.Pow(diffX, 2) + math.Pow(diffY, 2) + math.Pow(diffZ, 2))
 	case Curve:
@@ -278,7 +278,7 @@ func (p Point) Buffer(distance float64) Geometry {
 
 	lat := p.Lat()
 	lon := p.Lon()
-	z := p.Z()
+	z := p.Alt()
 
 	for i := 0; i < 360; i += angle {
 		rad := degToRad(float64(i))

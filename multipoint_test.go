@@ -18,7 +18,7 @@ func TestMultiPoint_SRID(t *testing.T) {
 }
 
 func TestMultiPoint_AsText(t *testing.T) {
-	asText := fmt.Sprintf("MULTIPOINT (%f %f %f, %f %f %f)", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z())
+	asText := fmt.Sprintf("MULTIPOINT (%f %f %f, %f %f %f)", p.Lat(), p.Lon(), p.Alt(), p2.Lat(), p2.Lon(), p2.Alt())
 	assert.Equal(t, asText, mp.AsText(), "MultiPoint AsText failed")
 }
 

@@ -32,8 +32,8 @@ func (m MultiLineString) Lon() float64 {
 	panic("implement me")
 }
 
-// Z function returns the altitude of the Geometry
-func (m MultiLineString) Z() float64 {
+// Alt function returns the altitude of the Geometry
+func (m MultiLineString) Alt() float64 {
 	panic("implement me")
 }
 
