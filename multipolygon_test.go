@@ -18,7 +18,7 @@ func TestMultiPolygon_SRID(t *testing.T) {
 }
 
 func TestMultiPolygon_AsText(t *testing.T) {
-	asText := fmt.Sprintf("MULTIPOLYGON (((%f %f %f, %f %f %f, %f %f %f)))", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z(), p.Lat(), p.Lon(), p.Z())
+	asText := fmt.Sprintf("MULTIPOLYGON (((%f %f %f, %f %f %f, %f %f %f)))", p.Lat(), p.Lon(), p.Alt(), p2.Lat(), p2.Lon(), p2.Alt(), p.Lat(), p.Lon(), p.Alt())
 	assert.Equal(t, asText, mpoly.AsText(), "MultiPoint AsText failed")
 }
 

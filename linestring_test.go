@@ -19,7 +19,7 @@ func TestLineString_Lon(t *testing.T) {
 }
 
 func TestLineString_Z(t *testing.T) {
-	assert.Equal(t, (p.Z()+p2.Z())/2, ls.Z(), "LineString Z failed")
+	assert.Equal(t, (p.Alt()+p2.Alt())/2, ls.Alt(), "LineString Alt failed")
 }
 
 func TestLineString_GeometryType(t *testing.T) {
@@ -31,7 +31,7 @@ func TestLineString_SRID(t *testing.T) {
 }
 
 func TestLineString_AsText(t *testing.T) {
-	asText := fmt.Sprintf("LINESTRING (%f %f %f, %f %f %f)", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z())
+	asText := fmt.Sprintf("LINESTRING (%f %f %f, %f %f %f)", p.Lat(), p.Lon(), p.Alt(), p2.Lat(), p2.Lon(), p2.Alt())
 	assert.Equal(t, asText, ls.AsText(), "LineString AsText failed")
 }
 

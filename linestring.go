@@ -65,8 +65,8 @@ func (l LineString) Lon() float64 {
 	return y
 }
 
-// Z function returns the altitude of the Geometry
-func (l LineString) Z() float64 {
+// Alt function returns the altitude of the Geometry
+func (l LineString) Alt() float64 {
 	topSum := 0.0
 	bottomSum := 0.0
 
@@ -75,7 +75,7 @@ func (l LineString) Z() float64 {
 		successorPoint := l[i+1]
 
 		length := firstPoint.Distance(successorPoint)
-		mid := (firstPoint.Z() + successorPoint.Z()) / 2
+		mid := (firstPoint.Alt() + successorPoint.Alt()) / 2
 
 		topSum += length * mid
 		bottomSum += length

@@ -32,8 +32,8 @@ func (m MultiPolygon) Lon() float64 {
 	panic("implement me")
 }
 
-// Z function returns the altitude of the Geometry
-func (m MultiPolygon) Z() float64 {
+// Alt function returns the altitude of the Geometry
+func (m MultiPolygon) Alt() float64 {
 	panic("implement me")
 }
 

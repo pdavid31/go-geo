@@ -18,7 +18,7 @@ func TestPolygon_SRID(t *testing.T) {
 }
 
 func TestPolygon_AsText(t *testing.T) {
-	asText := fmt.Sprintf("POLYGON ((%f %f %f, %f %f %f, %f %f %f))", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z(), p.Lat(), p.Lon(), p.Z())
+	asText := fmt.Sprintf("POLYGON ((%f %f %f, %f %f %f, %f %f %f))", p.Lat(), p.Lon(), p.Alt(), p2.Lat(), p2.Lon(), p2.Alt(), p.Lat(), p.Lon(), p.Alt())
 	assert.Equal(t, asText, poly.AsText(), "Polygon AsText failed")
 }
 

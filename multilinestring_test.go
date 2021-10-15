@@ -19,7 +19,7 @@ func TestMultiLineString_SRID(t *testing.T) {
 }
 
 func TestMultiLineString_AsText(t *testing.T) {
-	asText := fmt.Sprintf("MULTILINESTRING ((%f %f %f, %f %f %f))", p.Lat(), p.Lon(), p.Z(), p2.Lat(), p2.Lon(), p2.Z())
+	asText := fmt.Sprintf("MULTILINESTRING ((%f %f %f, %f %f %f))", p.Lat(), p.Lon(), p.Alt(), p2.Lat(), p2.Lon(), p2.Alt())
 	assert.Equal(t, asText, mls.AsText())
 }
 

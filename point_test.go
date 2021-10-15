@@ -19,7 +19,7 @@ func TestPoint_SRID(t *testing.T) {
 // TODO: test envelope
 
 func TestPoint_AsText(t *testing.T) {
-	asText := fmt.Sprintf("POINT Z (%f %f %f)", p.Lat(), p.Lon(), p.Z())
+	asText := fmt.Sprintf("POINT Alt (%f %f %f)", p.Lat(), p.Lon(), p.Alt())
 	assert.Equal(t, asText, p.AsText())
 }
 

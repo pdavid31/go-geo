@@ -33,8 +33,8 @@ func (p Polygon) Lon() float64 {
 	panic("implement me")
 }
 
-// Z function returns the altitude of the Geometry
-func (p Polygon) Z() float64 {
+// Alt function returns the altitude of the Geometry
+func (p Polygon) Alt() float64 {
 	panic("implement me")
 }
 

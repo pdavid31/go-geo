@@ -5,7 +5,7 @@ type Geometry interface {
 	// TODO: add complete simple feature model
 	Lat() float64
 	Lon() float64
-	Z() float64
+	Alt() float64
 
 	/* MISC */
 	// GeometryType returns subtype of geometry
